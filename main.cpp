@@ -4,10 +4,12 @@
 
 #include "input.h"
 #include <iostream>
+#include <fstream>
 using namespace std;
 
 
 const int maxSize = 100;
+const int NUM_ELEMENTS = 118;
 
 struct ChemistryElement
 {
@@ -23,8 +25,72 @@ struct ChemistryElement
     char Discoverer[100] = "";
 };
 
+ChemistryElement periodicTable[NUM_ELEMENTS] = { {1, 1.008, " H", "Hydrogen", 0, 8, 0.0, 0.0, 1900, ""}, {2, 1.008, "He", "Helium", 0, 2, 0.0, 0.0, 1900, ""},
+                                        {3, 1.008, "Li", " ", 0, 3, 0.0, 0.0, 1900, " "}, {4, 1.008, "Be", " ", 0, 4, 0.0, 0.0, 1900, " "},
+                                        {5, 1.008, " B", " ", 0, 6, 0.0, 0.0, 1900, " "}, {6, 1.008, " C", " ", 0, 8, 0.0, 0.0, 1900, " "},
+                                        {7, 1.008, " N", " ", 0, 1, 0.0, 0.0, 1900, " "}, {8, 1.008, " O", " ", 0, 1, 0.0, 0.0, 1900, " "}, 
+                                        {9, 1.008, " F", " ", 0, 1, 0.0, 0.0, 1900, " "}, {10, 1.008, "Ne", " ", 0, 1, 0.0, 0.0, 1900, " "},
+                                        {11, 1.008, "Na", " ", 0, 1, 0.0, 0.0, 1900, " "}, {12, 1.008, "Mg", " ", 0, 1, 0.0, 0.0, 1900, " "},
+                                        {13, 1.008, "Al", "", 0, 1, 0.0, 0.0, 1900, ""}, {14, 1.008, "Si", "", 0, 1, 0.0, 0.0, 1900, ""},
+                                        {15, 1.008, "P", "", 0, 1, 0.0, 0.0, 1900, ""}, {16, 1.008, " S", "", 0, 1, 0.0, 0.0, 1900, ""},
+                                        {17, 1.008, "Cl", " ", 0, 1, 0.0, 0.0, 1900, " "}, {18, 1.008, "Ar", " ", 0, 1, 0.0, 0.0, 1900, " "},
+                                        {19, 1.008, " K", " ", 0, 1, 0.0, 0.0, 1900, " "}, {20, 1.008, "Ca", " ", 0, 1, 0.0, 0.0, 1900, " "},
+                                        {21, 1.008, "Sc", " ", 0, 1, 0.0, 0.0, 1900, " "}, {22, 1.008, "Ti", " ", 0, 1, 0.0, 0.0, 1900, " "},
+                                        {23, 1.008, " V", " ", 0, 1, 0.0, 0.0, 1900, " "}, {24, 1.008, "Cr", " ", 0, 1, 0.0, 0.0, 1900, " "},
+                                        {25, 1.008, "Mn", " ", 0, 1, 0.0, 0.0, 1900, " "}, {26, 1.008, "Fe", " ", 0, 1, 0.0, 0.0, 1900, " "},
+                                        {27, 1.008, "Co", " ", 0, 1, 0.0, 0.0, 1900, " "}, {28, 1.008, "Ni", " ", 0, 1, 0.0, 0.0, 1900, " "},
+                                        {29, 1.008, "Cu", " ", 0, 1, 0.0, 0.0, 1900, " "}, {30, 1.008, "Zn", " ", 0, 1, 0.0, 0.0, 1900, " "},
+                                        {31, 1.008, "Ga", " ", 0, 1, 0.0, 0.0, 1900, " "}, {32, 1.008, "Ge", " ", 0, 1, 0.0, 0.0, 1900, " "},
+                                        {33, 1.008, "As", " ", 0, 1, 0.0, 0.0, 1900, " "}, {34, 1.008, "Se", " ", 0, 1, 0.0, 0.0, 1900, " "},
+                                        {35, 1.008, "Br", " ", 0, 1, 0.0, 0.0, 1900, " "}, {36, 1.008, "Kr", " ", 0, 1, 0.0, 0.0, 1900, " "},
+                                        {37, 1.008, "Rb", " ", 0, 1, 0.0, 0.0, 1900, " "}, {38, 1.008, "Sr", " ", 0, 1, 0.0, 0.0, 1900, " "},
+                                        {39, 1.008, " Y", " ", 0, 1, 0.0, 0.0, 1900, " "}, {40, 1.008, "Zr", " ", 0, 1, 0.0, 0.0, 1900, " "},
+                                        {41, 1.008, "Nb", " ", 0, 1, 0.0, 0.0, 1900, " "}, {42, 1.008, "Mo", " ", 0, 1, 0.0, 0.0, 1900, " "},
+                                        {43, 1.008, "Tc", " ", 0, 1, 0.0, 0.0, 1900, " "}, {44, 1.008, "Ru", " ", 0, 1, 0.0, 0.0, 1900, " "},
+                                        {45, 1.008, "Rh", " ", 0, 1, 0.0, 0.0, 1900, " "}, {46, 1.008, "Pd", " ", 0, 1, 0.0, 0.0, 1900, " "},
+                                        {47, 1.008, "Ag", " ", 0, 1, 0.0, 0.0, 1900, " "}, {48, 1.008, "Cd", " ", 0, 1, 0.0, 0.0, 1900, " "}, 
+                                        {49, 1.008, "In", " ", 0, 1, 0.0, 0.0, 1900, " "}, {50, 1.008, "Sn", " ", 0, 1, 0.0, 0.0, 1900, " "},
+                                        {51, 1.008, "Sb", " ", 0, 1, 0.0, 0.0, 1900, " "}, {52, 1.008, "Te", " ", 0, 1, 0.0, 0.0, 1900, " "},
+                                        {53, 1.008, " I", " ", 0, 1, 0.0, 0.0, 1900, " "}, {54, 1.008, "Xe", " ", 0, 1, 0.0, 0.0, 1900, " "},
+                                        {55, 1.008, "Cs", " ", 0, 1, 0.0, 0.0, 1900, " "}, {56, 1.008, "Ba", " ", 0, 1, 0.0, 0.0, 1900, " "},
+                                        {57, 1.008, "La", " ", 0, 1, 0.0, 0.0, 1900, " "}, {58, 1.008, "Ce", " ", 0, 1, 0.0, 0.0, 1900, " "},
+                                        {59, 1.008, "Pr", " ", 0, 1, 0.0, 0.0, 1900, " "}, {60, 1.008, "Nd", " ", 0, 1, 0.0, 0.0, 1900, " "},
+                                        {61, 1.008, "Pm", " ", 0, 1, 0.0, 0.0, 1900, " "}, {62, 1.008, "Sm", " ", 0, 1, 0.0, 0.0, 1900, " "},
+                                        {63, 1.008, "Eu", " ", 0, 1, 0.0, 0.0, 1900, " "}, {64, 1.008, "Gd", " ", 0, 1, 0.0, 0.0, 1900, " "},
+                                        {65, 1.008, "Tb", " ", 0, 1, 0.0, 0.0, 1900, " "}, {66, 1.008, "Dy", " ", 0, 1, 0.0, 0.0, 1900, " "},
+                                        {67, 1.008, "Ho", " ", 0, 1, 0.0, 0.0, 1900, " "}, {68, 1.008, "Er", " ", 0, 1, 0.0, 0.0, 1900, " "},
+                                        {69, 1.008, "Tm", " ", 0, 1, 0.0, 0.0, 1900, " "}, {70, 1.008, "Yb", " ", 0, 1, 0.0, 0.0, 1900, " "},
+                                        {71, 1.008, "Lu", " ", 0, 1, 0.0, 0.0, 1900, " "}, {72, 1.008, "Hf", " ", 0, 1, 0.0, 0.0, 1900, " "}, 
+                                        {73, 1.008, "Ta", " ", 0, 1, 0.0, 0.0, 1900, " "}, {74, 1.008, " W", " ", 0, 1, 0.0, 0.0, 1900, " "},
+                                        {75, 1.008, "Re", " ", 0, 1, 0.0, 0.0, 1900, " "}, {76, 1.008, "Os", " ", 0, 1, 0.0, 0.0, 1900, " "},
+                                        {77, 1.008, "Ir", " ", 0, 1, 0.0, 0.0, 1900, " "}, {78, 1.008, "Pt", " ", 0, 1, 0.0, 0.0, 1900, " "},
+                                        {79, 1.008, "Au", " ", 0, 1, 0.0, 0.0, 1900, " "}, {80, 1.008, "Hg", " ", 0, 1, 0.0, 0.0, 1900, " "},
+                                        {81, 1.008, "Tl", " ", 0, 1, 0.0, 0.0, 1900, " "}, {82, 1.008, "Pb", " ", 0, 1, 0.0, 0.0, 1900, " "},
+                                        {83, 1.008, "Bi", " ", 0, 1, 0.0, 0.0, 1900, " "}, {84, 1.008, "Po", " ", 0, 1, 0.0, 0.0, 1900, " "},
+                                        {85, 1.008, "At", " ", 0, 1, 0.0, 0.0, 1900, " "}, {86, 1.008, "Rn", " ", 0, 1, 0.0, 0.0, 1900, " "},
+                                        {87, 1.008, "Fr", "", 0, 1, 0.0, 0.0, 1900, ""}, {88, 1.008, "Ra", "", 0, 1, 0.0, 0.0, 1900, ""}, 
+                                        {89, 1.008, "Ac", "", 0, 1, 0.0, 0.0, 1900, ""}, {90, 1.008, "Th", "", 0, 1, 0.0, 0.0, 1900, ""},
+                                        {91, 1.008, "Pa", "", 0, 1, 0.0, 0.0, 1900, ""}, {92, 1.008, " U", "", 0, 1, 0.0, 0.0, 1900, ""},
+                                        {93, 1.008, "Np", "", 0, 1, 0.0, 0.0, 1900, ""}, {94, 1.008, "Pu", "", 0, 1, 0.0, 0.0, 1900, ""}, 
+                                        {95, 1.008, "Am", "", 0, 1, 0.0, 0.0, 1900, ""}, {96, 1.008, "Cm", "", 0, 1, 0.0, 0.0, 1900, ""},
+                                        {97, 1.008, "Bk", "", 0, 1, 0.0, 0.0, 1900, ""}, {98, 1.008, "Cf", "", 0, 1, 0.0, 0.0, 1900, ""},
+                                        {99, 1.008, "Es", "", 0, 1, 0.0, 0.0, 1900, ""}, {100, 1.008, "Fm", "", 0, 1, 0.0, 0.0, 1900, ""},
+                                        {101, 1.008, "Md", "", 0, 1, 0.0, 0.0, 1900, ""}, {102, 1.008, "No", "", 0, 1, 0.0, 0.0, 1900, ""},
+                                        {103, 1.008, "Lr", "", 0, 1, 0.0, 0.0, 1900, ""}, {104, 1.008, "Rf", "", 0, 1, 0.0, 0.0, 1900, ""},
+                                        {105, 1.008, "Db", "", 0, 1, 0.0, 0.0, 1900, ""}, {106, 1.008, "Sg", "", 0, 1, 0.0, 0.0, 1900, ""},
+                                        {107, 1.008, "Bh", "", 0, 1, 0.0, 0.0, 1900, ""}, {108, 1.008, "Hs", "", 0, 1, 0.0, 0.0, 1900, ""},
+                                        {109, 1.008, "Mt", "", 0, 1, 0.0, 0.0, 1900, ""}, {110, 1.008, "Ds", "", 0, 1, 0.0, 0.0, 1900, ""},
+                                        {111, 1.008, "Rg", "", 0, 1, 0.0, 0.0, 1900, ""}, {112, 1.008, "Cn", "", 0, 1, 0.0, 0.0, 1900, ""},
+                                        {113, 1.008, "Nh", "", 0, 1, 0.0, 0.0, 1900, ""}, {114, 1.008, " H", "", 0, 1, 0.0, 0.0, 1900, ""},
+                                        {115, 1.008, "Mc", "", 0, 1, 0.0, 0.0, 1900, ""}, {116, 1.008, "Lv", "", 0, 1, 0.0, 0.0, 1900, ""}};
+
 // Prototypes
-int menuOption();
+char menuOption();
+void displayPeriodicTable();
+int advanceBinaryFileOperationMenu();
+int dynamicAllocatedArrayMenu();
+int vectorMenu();
+void searchAndUpdateAnElement();
 struct MovieData;
 struct CompanyData;
 
@@ -43,17 +109,21 @@ int main()
     {
         switch (menuOption())
         {
-        case 0:
+        case 'x':
+        case 'X':
             exit(1);
             break;
-        case 2:
-            
+        case 'a':
+        case 'A':
+            advanceBinaryFileOperationMenu();
             break;
-        case 3:
-            
+        case 'b':
+        case 'B':
+            dynamicAllocatedArrayMenu();
             break;
-       
-        case 12:
+        case 'c':
+        case 'C':
+            vectorMenu();
             break;
         default: cout << "\t\tERROR - Invalid option. Please re-enter."; break;
         }
@@ -68,25 +138,365 @@ int main()
 // Precondition: Displays the menu of options to user and accepts input.
 // Postcondition: Displays the menu of options to user and accepts input.
 
-int menuOption()
+char menuOption()
 {
     system("cls");
-    cout << "\n\tChapter 11 - Assignments by Kim Hoang";
+    cout << "\t\t\tPERIODIC TABLE OF ELEMENTS BY SYMBOL \n\n";
+    displayPeriodicTable();
+
+    cout << "\n\tCMPR121 - Exam 1 (Chapter 12 .. 1) by Kim Hoang (9/23/2023) \n";
     cout << "\n\t" << string(60, char(205));
-    cout << "\n\t2. Challenge 2 - Movie Profit";
-    cout << "\n\t3. Challenge 3 - Corporate Sales Data";
-    cout << "\n\t5. Challenge 5 - Weather Statistics Modification";
-    cout << "\n\t6. Challenge 6 - Soccer Scores";
-    cout << "\n\t8. Challenge 8 - Search Function for Customer Accounts";
-    cout << "\n\t12. Challenge 12 - Course Grade";
+    cout << "\n\tA. Advance Binary File Operation (chapter 12) 50 pts";
+    cout << "\n\tB. Dynamic Allocated Array (chapter 9) 50 pts";
+    cout << "\n\tC. Vector (array)          (chapter 7) 25Pts Xtra";
     cout << "\n\t" << string(60, char(196));
-    cout << "\n\t0. exit";
+    cout << "\n\tx. exit";
     cout << "\n\t" << string(60, char(205));
 
-    return inputInteger("\n\tOption: ", 0, 12);
+    return  inputChar("\n\tOption: ");
 }
 
+void displayElement(ChemistryElement element)
+{
+    cout << "\n\t" << "Atomic Number: " << element.atomicNumber;
+    cout << "\n\t" << "Symbol: " << element.symbol;
+    cout << "\n\t" << "Name: " << element.name;
+    cout << "\n\t" << "Atomic Mass: " << element.atomicMass;
+    cout << "\n\t" << "Boiling point: " << element.boilingPoint;
+    cout << "\n\t" << "Melting point: " << element.meltingPoint;
+    cout << "\n\t" << "Chemical Group Block: " << element.chemicalGroupBlock;
+    cout << "\n\t" << "Standard State: " << element.standardState;
+    cout << "\n\t" << "Year discovered: " << element.yearDiscovered;
+    cout << "\n\t" << "Discoverer: " << element.Discoverer;
+}
 
+void displayElementsFromBinaryFile()
+{
+    ifstream readBinary("C:\\Users\\minhl\\Downloads\\SORTED.dat", ios::binary | ios::out);
+    int numberOfElementRead = 0;
+    cout << "\n";
+    while (readBinary.good() && numberOfElementRead < NUM_ELEMENTS) {
+        ChemistryElement element;
+        readBinary.read((char*)&element, sizeof(ChemistryElement));
+        numberOfElementRead++;
+        cout << "\n\t" << string(60, char(196));
+        cout << "\n\tElement # " << numberOfElementRead << " size (" << sizeof(ChemistryElement) << " bytes):";
+        displayElement(element);
+    }
+    readBinary.close();
+}
+int elementExists(string element)
+{
+    for (int i = 0; i < NUM_ELEMENTS; i++)
+    {
+        if (periodicTable[i].symbol == element.c_str())
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
+void editAtomicNumber(ChemistryElement& element)
+{
+    int atomicNumber = inputInteger("\n Enter Atomic Number: ", 1, 118);
+    element.atomicNumber = atomicNumber;
+}
+
+void editSymbol(ChemistryElement & element)
+{
+    string symbol = inputString("\n Enter Symbol: ", false);
+    while (symbol.length() < 1 || symbol.length() > 3)
+    {
+        symbol = inputString("\n Enter Symbol: ", false);
+    }
+    strncpy_s(element.symbol, symbol.c_str(), symbol.length());
+}
+void editAtomicMass(ChemistryElement& element)
+{
+    double atomicMass = inputDouble("\n Enter Atomic Mass: ", 0, true);
+    element.atomicMass = atomicMass;
+}
+
+void writeElementToFile(string fileName, ChemistryElement element, int elementPosition)
+{
+    cout << "\nUpdating element and then exit";
+    ofstream outfile(fileName, std::ofstream::binary);
+    //outfile.seekp(elementPosition);
+    //outfile.write((char*)&element, sizeof(ChemistryElement));
+    outfile.close();
+}
+
+void editElementPropertiesMenu(ChemistryElement & element, string fileName, int elementPosition)
+{
+    int option = -2; //inputInteger("\n\tOption: ", -1, 10);
+    while ((option != -1))
+    {
+        cout << "\n Edit Element Properties Menu";
+        cout << "\n 1. Atomic Number";
+        cout << "\n 2. Symbol";
+        cout << "\n 3. Name";
+        cout << "\n 4. Atomic Mass";
+        cout << "\n 5. Chemical Groupd Block";
+        cout << "\n 6. Standard State";
+        cout << "\n 7. Melting point";
+        cout << "\n 8. Boiling point";
+        cout << "\n 9. Discovered year";
+        cout << "\n 10. Discovered By";
+
+        cout << "\n-1. return without committing the updates";
+        cout << "\n 0. Committing the updates and return";
+        option = inputInteger("\n\tOption: ", -1, 10);
+        while (option < -1 || option > 10)
+        {
+            option = inputInteger("\n\tOption: ", -1, 10);
+        }
+
+        switch (option)
+        {
+        case 1:
+            editAtomicNumber(element);
+            break;
+        case 2:
+            editSymbol(element);
+            break;
+        case 3:
+
+            break;
+        case 4:
+            editAtomicMass(element);
+            break;
+
+        case 5:
+
+            break;
+        case 6:
+            break;
+        case 7:
+
+            break;
+        case 8:
+
+            break;
+        case 9:
+
+            break;
+        case 10:
+
+            break;
+
+        case 0:
+            writeElementToFile(fileName, element, elementPosition);
+            break;
+
+        case -1:
+            cout << "\nExiting without saving.....";
+            break;
+
+        default:
+            break;
+        }
+    }
+
+   
+
+}
+
+void searchAndUpdateAnElement()
+{
+    system("cls");
+    string symbol = inputString("\nEnter an Element Symbol to search and update:", false);
+    int elementIndex = -1;
+    string fileName = "C:\\Users\\minhl\\Downloads\\SORTED.dat";
+    ifstream readBinary(fileName, ios::binary | ios::out | ios::in);
+    if (readBinary.good())
+    {
+        readBinary.seekg(0, readBinary.end);
+        int length = readBinary.tellg();
+        int numOfElements = length / sizeof(ChemistryElement);
+        readBinary.seekg(0, readBinary.beg);
+        for (int i = 0; i < numOfElements; i++)
+        {
+            ChemistryElement element;
+            readBinary.seekg(0, readBinary.beg + (i * sizeof(ChemistryElement)));
+            readBinary.read((char*)&element, sizeof(ChemistryElement));
+            readBinary.close();
+            if (element.symbol == symbol)
+            {
+                displayElement(element);
+                editElementPropertiesMenu(element, fileName, i);
+                break;
+            }
+        }
+    }
+    
+    
+}
+
+int advanceBinaryFileOperationMenu()
+{
+    system("cls");
+    cout << "\t\t\tAdvance Binary File Operation \n\n";
+    cout << "\n\t" << string(60, char(205));
+    cout << "\n\t1. Read and Display ALL elements from binary data file ";
+    cout << "\n\t2. Search and update an element by Symbol from binary file";
+    cout << "\n\t" << string(60, char(196));
+    cout << "\n\t0. Return to main menu";
+    cout << "\n\t" << string(60, char(205));
+
+    int selection = inputInteger("\n\tOption: ", 0, 2);
+
+
+    while (selection < 0 || selection > 2)
+    {
+        selection = inputInteger("\n\tOption: ", 0, 2);
+    }
+
+    switch (selection) 
+    {
+    case 1:
+        displayElementsFromBinaryFile();
+        break;
+
+    case 2:
+        searchAndUpdateAnElement();
+        break;
+
+    case 0:
+
+        break;
+    }
+    
+
+    return  inputInteger("\n\tOption: ", 0, 2);
+}
+
+int dynamicAllocatedArrayMenu()
+{
+    return 1;
+}
+int vectorMenu()
+{
+    return 1;
+}
+
+void drawEmptyElements(int numEle)
+{
+    for (int i = 0; i < numEle; i++)
+    {
+        cout << "     ";
+    }
+}
+
+void drawElements(int startingAtomicNum, int howManyEle)
+{
+    for (int i = 0; i < howManyEle; i++)
+    {
+        int index = startingAtomicNum + i - 1;
+        switch (periodicTable[index].chemicalGroupBlock)
+        {
+        case 1:
+            cout << "\033[1;31m";
+            break;
+        case 2:
+            cout << "\033[1;32m";
+            break;
+        case 3:
+            cout << "\033[1;33m";
+            break;
+        case 4:
+            cout << "\033[1;34m";
+            break;
+        case 5:
+            cout << "\033[1;35m";
+            break;
+        case 6:
+            cout << "\033[1;36m";
+            break;
+        case 7:
+            cout << "\033[1;37m";
+            break;
+        case 8:
+            cout << "\033[1;38m";
+            break;
+        }
+        cout << "[" << periodicTable[index].symbol << "]";
+        
+    }
+}
+
+void displayPeriodicTable()
+{
+    int currentAtomic = 0;
+    for (int row = 0; row < 10; row++)
+    {
+        if (row == 0)
+        { 
+            drawElements(periodicTable[currentAtomic].atomicNumber, 1);
+            currentAtomic++;
+            drawEmptyElements(16);
+            drawElements(periodicTable[currentAtomic].atomicNumber, 1);
+            currentAtomic++;
+            cout << "\n";
+        }
+        else if (row == 1 || row == 2)
+        {
+            drawElements(periodicTable[currentAtomic].atomicNumber, 2);
+            currentAtomic += 2;
+            drawEmptyElements(10);
+            drawElements(periodicTable[currentAtomic].atomicNumber, 6);
+            currentAtomic += 6;
+            cout << "\n";
+        }
+        else if (row == 3 || row == 4)
+        {
+            drawElements(periodicTable[currentAtomic].atomicNumber, 18);
+            currentAtomic += 18;
+            cout << "\n";
+        }
+        else if (row == 5 || row == 6)
+        {
+            drawElements(periodicTable[currentAtomic].atomicNumber, 2);
+            currentAtomic += 2;
+            if (row == 5)
+            {
+                cout << " *  ";
+                drawElements(72, 15);
+                currentAtomic += 15;
+               
+            }
+            else
+            {
+                cout << " ** ";
+                drawElements(104, 15);
+                currentAtomic += 15;
+            }
+            cout << "\n";
+            
+        }
+        else if (row == 7)
+        {
+            cout << "\n";
+        }
+        else if (row == 8)
+        {
+            drawEmptyElements(2);
+            cout << " *  ";
+            cout << "\033[1;34m";
+            drawElements(57, 15);
+            cout << "\033[0m\n";
+        }
+        else if (row == 9)
+        {
+            drawEmptyElements(2);
+            cout << " **  ";
+            cout << "\033[1;30m";
+            drawElements(89, 15);
+            cout << "\033[0m\n";
+        }
+
+    }
+}
 
 
 
