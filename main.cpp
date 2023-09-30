@@ -218,19 +218,50 @@ void editAtomicMass(ChemistryElement& element)
     element.atomicMass = atomicMass;
 }
 
-void writeElementToFile(string fileName, ChemistryElement element, int elementPosition)
+void writeElementToFile(string fileName, ChemistryElement updatedElement, int elementPosition)
 {
     cout << "\nUpdating element and then exit";
-    ofstream outfile(fileName, std::ofstream::binary);
-    //outfile.seekp(elementPosition);
-    //outfile.write((char*)&element, sizeof(ChemistryElement));
+    ofstream outfile("C:\\Users\\minhl\\Downloads\\temp.dat", std::ofstream::binary);
+    
+    ifstream readBinary("C:\\Users\\minhl\\Downloads\\SORTED.dat", ios::binary | ios::out);
+    int numberOfElementRead = 0;
+    cout << "\n";
+    while (readBinary.good() && numberOfElementRead < NUM_ELEMENTS) {
+        ChemistryElement element;
+        readBinary.read((char*)&element, sizeof(ChemistryElement));
+        
+        outfile.seekp(numberOfElementRead * sizeof(ChemistryElement));
+        if (numberOfElementRead == elementPosition) 
+        {
+            outfile.write((char*)&updatedElement, sizeof(ChemistryElement));
+            displayElement(updatedElement);
+        } 
+        else
+        {
+            outfile.write((char*)&element, sizeof(ChemistryElement));
+            displayElement(element);
+        }
+        numberOfElementRead++;
+    }
+    readBinary.close();
     outfile.close();
+
+    //replace SORTED.dat file content with temp.data
+    
+    ofstream sorted("C:\\Users\\minhl\\Downloads\\SORTED.dat", ios::binary | ios::out);
+    ifstream tempFile("C:\\Users\\minhl\\Downloads\\temp.dat", ios::binary | ios::out);
+    ChemistryElement temp[NUM_ELEMENTS];
+    tempFile.read((char*)&temp, sizeof(ChemistryElement)*NUM_ELEMENTS);
+    sorted.write((char*)&temp, sizeof(ChemistryElement) * NUM_ELEMENTS);
+    sorted.close();
+    tempFile.close();
+
 }
 
-void editElementPropertiesMenu(ChemistryElement & element, string fileName, int elementPosition)
+ChemistryElement editElementPropertiesMenu(ChemistryElement element, int elementPosition, bool& saveUpdates)
 {
     int option = -2; //inputInteger("\n\tOption: ", -1, 10);
-    while ((option != -1))
+    while ((option == -2))
     {
         cout << "\n Edit Element Properties Menu";
         cout << "\n 1. Atomic Number";
@@ -256,37 +287,42 @@ void editElementPropertiesMenu(ChemistryElement & element, string fileName, int 
         {
         case 1:
             editAtomicNumber(element);
+            option = -2;
             break;
         case 2:
             editSymbol(element);
+            option = -2;
             break;
         case 3:
-
+            option = -2;
             break;
         case 4:
             editAtomicMass(element);
+            option = -2;
             break;
 
         case 5:
-
+            option = -2;
             break;
         case 6:
+            option = -2;
             break;
         case 7:
-
+            option = -2;
             break;
         case 8:
-
+            option = -2;
             break;
         case 9:
-
+            option = -2;
             break;
         case 10:
-
+            option = -2;
             break;
 
         case 0:
-            writeElementToFile(fileName, element, elementPosition);
+            saveUpdates = true;
+            
             break;
 
         case -1:
@@ -298,7 +334,7 @@ void editElementPropertiesMenu(ChemistryElement & element, string fileName, int 
         }
     }
 
-   
+    return element;
 
 }
 
@@ -312,9 +348,13 @@ void searchAndUpdateAnElement()
     if (readBinary.good())
     {
         readBinary.seekg(0, readBinary.end);
+        ChemistryElement elements[NUM_ELEMENTS];
         int length = readBinary.tellg();
         int numOfElements = length / sizeof(ChemistryElement);
         readBinary.seekg(0, readBinary.beg);
+        readBinary.read((char*)&elements, sizeof(ChemistryElement)*NUM_ELEMENTS);
+
+        bool saveUpdate = false;
         for (int i = 0; i < numOfElements; i++)
         {
             ChemistryElement element;
@@ -324,13 +364,44 @@ void searchAndUpdateAnElement()
             if (element.symbol == symbol)
             {
                 displayElement(element);
-                editElementPropertiesMenu(element, fileName, i);
+                editElementPropertiesMenu(element, i, saveUpdate);
+                if (saveUpdate)
+                {
+                    writeElementToFile(fileName, element, i);
+                }
                 break;
             }
         }
     }
     
     
+}
+
+
+void searchAndUpdateAnElement(ChemistryElement * elements, int numOfElements)
+{
+    system("cls");
+    string symbol = inputString("\nEnter an Element Symbol to search and update:", false);
+    int elementIndex = -1;
+
+    bool saveUpdate = false;
+    for (int i = 0; i < numOfElements; i++)
+    {
+        ChemistryElement element = elements[i];
+        if (element.symbol == symbol)
+        {
+            displayElement(element);
+            ChemistryElement updatedElement = editElementPropertiesMenu(element, i, saveUpdate);
+            if (saveUpdate)
+            {
+                elements[i] = updatedElement;
+            }
+            break;
+        }
+    }
+    
+
+
 }
 
 int advanceBinaryFileOperationMenu()
@@ -371,8 +442,152 @@ int advanceBinaryFileOperationMenu()
     return  inputInteger("\n\tOption: ", 0, 2);
 }
 
+void selectionSort(int atomics[], ChemistryElement elements[],  int n)
+{
+    int i, j, min_idx;
+
+    // One by one move boundary of
+    // unsorted subarray
+    for (i = 0; i < n - 1; i++) {
+
+        // Find the minimum element in
+        // unsorted array
+        min_idx = i;
+        for (j = i + 1; j < n; j++) {
+            if (atomics[j] < atomics [min_idx])
+                min_idx = j;
+        }
+
+        // Swap the found minimum element
+        // with the first element
+        if (min_idx != i)
+        {
+            swap(atomics[min_idx], atomics[i]);
+            swap(elements[min_idx], elements[i]);
+        }
+    }
+
+}
+
+
+
+
+void readStoreBinaryFileToSortedArray(ChemistryElement *& elements, int & numOfElements)
+{
+    string fileName = "C:\\Users\\minhl\\Downloads\\UNSORTED.dat";
+    
+    int atomics[NUM_ELEMENTS];
+    //TODO: prompt for unsorted file and validate
+
+    ifstream unsortedFile(fileName, ios::binary | ios::in);
+    numOfElements = 0;
+    ChemistryElement * dynamicArray = NULL;
+    if (unsortedFile.good())
+    {
+        unsortedFile.seekg(0, unsortedFile.end);
+        int length = unsortedFile.tellg();
+        numOfElements = length / sizeof(ChemistryElement);
+        elements = new ChemistryElement[numOfElements];
+        unsortedFile.seekg(0, unsortedFile.beg);
+        unsortedFile.read((char*)elements, sizeof(ChemistryElement) * numOfElements);
+           
+    }
+    unsortedFile.close();
+
+    //dualSort(atomics, elements, NUM_ELEMENTS);
+    selectionSort(atomics, elements, numOfElements);
+    cout << "\n" << numOfElements << " (struct) data from " << fileName << " have been stored into dynamic allocated array and sorted by Atomic number";
+    cout << "\nPress any key to continue...";
+    char c;
+    cin >> c;
+}
+
+void writeArrayToBinaryFile(ChemistryElement* elements, int numOfElement)
+{
+    if (elements != NULL)
+    {
+        string fileName = inputString("\nEnter the binary file name to write to:", false);
+        ofstream outFile;
+        outFile.open(fileName, ios::out);
+        while (!outFile.is_open())
+        {
+            fileName = inputString("\nEnter the binary file name to write to:", false);
+            
+        }
+        outFile.write((char*)elements, sizeof(ChemistryElement) * numOfElement);
+    }
+    else
+    {
+        cout << "\nBinary file has not been loaded";
+    }
+}
 int dynamicAllocatedArrayMenu()
 {
+    int selection = -1;
+    ChemistryElement* elements = NULL;
+    int count = 0;
+    while (selection != 0)
+    {
+        system("cls");
+        cout << "\t\t\tDynamic Allocated Array Menu \n\n";
+        cout << "\n\t" << string(60, char(205));
+        cout << "\n\t1. Read, store ALL elements from binary file into the sorted array";
+        cout << "\n\t2. Display ALL elements from the array";
+        cout << "\n\t3. Search and update an element by Atomic Number for the array";
+        cout << "\n\t4. Write All elements from the array into the binary file";
+        cout << "\n\t" << string(60, char(196));
+        cout << "\n\t0. Return to main menu";
+        cout << "\n\t" << string(60, char(205));
+        cout << "\n===============================================================================================";
+        selection = inputInteger("\n\tOption: ", 0, 4);
+        
+
+
+
+        while (selection < 0 || selection > 4)
+        {
+            selection = inputInteger("\n\tOption: ", 0, 2);
+        }
+
+        switch (selection)
+        {
+        case 1:
+            readStoreBinaryFileToSortedArray(elements, count);
+            break;
+
+        case 2:
+            if (elements == NULL)
+            {
+                cout << "\n Binary file has not been loaded into the array.  Please perform step 1 first";
+                break;
+            }
+            for (int i = 0; i < count; i++)
+            {
+                cout << "\n";
+                displayElement(elements[i]);
+            }
+            cout << "\nPress any key to continue...";
+            char c;
+            cin >> c;
+            break;
+        case 3:
+            searchAndUpdateAnElement(elements, count);
+            break;
+        case 4:
+            writeArrayToBinaryFile(elements, count);
+            cout << "\nPress any key to continue...";
+            
+            cin >> c;
+            break;
+
+        case 0:
+
+            break;
+        }
+        
+    }
+    delete elements;
+    elements = NULL;
     return 1;
 }
 int vectorMenu()
