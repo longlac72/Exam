@@ -159,32 +159,34 @@ char menuOption()
 
 void displayElement(ChemistryElement element)
 {
-    cout << "\n\t" << "Atomic Number "  << "\t\t:" << element.atomicNumber;
-    cout << "\n\t" << "Symbol " << "\t\t:"  << element.symbol;
-    cout << "\n\t" << "Name " << "\t\t:" << element.name;
-    cout << "\n\t" << "Atomic Mass " << "\t\t:"  << element.atomicMass;
-    cout << "\n\t" << "Boiling point " << "\t\t:" << element.boilingPoint;
-    cout << "\n\t" << "Melting point " << "\t\t:" << element.meltingPoint;
-    cout << "\n\t" << "Chemical Group Block " << "\t\t:" << element.chemicalGroupBlock;
-    cout << "\n\t" << "Standard State " << "\t\t:" << element.standardState;
-    cout << "\n\t" << "Year discovered " << "\t\t:" << element.yearDiscovered;
-    cout << "\n\t" << "Discoverer " << "\t\t:"  << element.Discoverer;
+    cout << "\n\t" << "Atomic Number "  << "\t\t\t\t: " << element.atomicNumber;
+    cout << "\n\t" << "Symbol " << "\t\t\t\t\t: "  << element.symbol;
+    cout << "\n\t" << "Name " << "\t\t\t\t\t: " << element.name;
+    cout << "\n\t" << "Atomic Mass " << "\t\t\t\t: "  << element.atomicMass;
+    cout << "\n\t" << "Chemical Group Block " << "\t\t\t: " << element.chemicalGroupBlock;
+    cout << "\n\t" << "Standard State " << "\t\t\t\t: " << element.standardState;
+    cout << "\n\t" << "Boiling point " << "\t\t\t\t: " << element.boilingPoint - 273.15 << " C (" << element.meltingPoint << " K)";
+    cout << "\n\t" << "Melting point " << "\t\t\t\t: " << element.meltingPoint - 273.15 << " C (" << element.meltingPoint << " K)";
+    cout << "\n\t" << "Year discovered " << "\t\t\t: " << element.yearDiscovered;
+    cout << "\n\t" << "Discoverer " << "\t\t\t\t: "  << element.Discoverer;
 }
 
-void displayElementsFromBinaryFile()
+string displayElementsFromBinaryFile()
 {
-    ifstream readBinary("C:\\Users\\minhl\\Downloads\\SORTED.dat", ios::binary | ios::out);
+    string fileName = inputString("\n\tEnter the binary data file name: ", false);
+    ifstream readBinary(fileName, ios::binary | ios::out);
     int numberOfElementRead = 0;
     cout << "\n";
     while (readBinary.good() && numberOfElementRead < NUM_ELEMENTS) {
         ChemistryElement element;
         readBinary.read((char*)&element, sizeof(ChemistryElement));
         numberOfElementRead++;
+        cout << "\n\n\tElement (struct) # " << numberOfElementRead << " - " << sizeof(ChemistryElement) << " Bytes";
         cout << "\n\t" << string(60, char(196));
-        cout << "\n\tElement (struct) # " << numberOfElementRead << " - " << sizeof(ChemistryElement) << " Bytes):";
         displayElement(element);
     }
     readBinary.close();
+    return fileName;
 }
 int elementExists(string element)
 {
@@ -321,7 +323,7 @@ ChemistryElement editElementPropertiesMenu(ChemistryElement element, int element
             break;
 
         case -1:
-            cout << "\nExiting without saving.....";
+            cout << "\nElement has NOT been updated.";
             break;
 
         default:
@@ -333,13 +335,18 @@ ChemistryElement editElementPropertiesMenu(ChemistryElement element, int element
 
 }
 
-void searchAndUpdateAnElement()
+void searchAndUpdateAnElement(string fileName)
 {
-    //system("cls");
+    if (fileName.empty())
+    {
+        cout << "\n\tERROR: no binary file has been specified from step #1.\n";
+      
+        return;
+    }
     string symbol = inputString("\n\tEnter an Element Symbol to search and update:", false);   
     cout << "\n\t" << string(90, char(196));
     int elementIndex = -1;
-    string fileName = "C:\\Users\\minhl\\Downloads\\SORTED.dat";
+    
     ifstream readBinary(fileName, ios::binary | ios::out | ios::in);
     if (readBinary.good())
     {
@@ -448,6 +455,7 @@ void searchAndUpdateAnElementByAtomicNumber(ChemistryElement* elements, int numO
 int advanceBinaryFileOperationMenu()
 {
     int selection = -1;
+    string fileName = "";
     do {
         system("cls");
         cout << "\tAdvance Binary File Operations Menu";
@@ -463,13 +471,13 @@ int advanceBinaryFileOperationMenu()
         switch (selection)
         {
         case 1:
-            displayElementsFromBinaryFile();
+            fileName = displayElementsFromBinaryFile();
             cout << "\n\n     ";
             system("pause");
             break;
 
         case 2:
-            searchAndUpdateAnElement();
+            searchAndUpdateAnElement(fileName);
             cout << "\n\n     ";
             system("pause");
             break;
@@ -517,10 +525,9 @@ void selectionSort(int atomics[], ChemistryElement elements[],  int n)
 
 void readStoreBinaryFileToSortedArray(ChemistryElement *& elements, int & numOfElements)
 {
-    string fileName = "C:\\Users\\minhl\\Downloads\\UNSORTED.dat";
+    string fileName = inputString("\n\tEnter the binary data file name: ", false);
     
     int atomics[NUM_ELEMENTS];
-    //TODO: prompt for unsorted file and validate
 
     ifstream unsortedFile(fileName, ios::binary | ios::in);
     numOfElements = 0;
@@ -533,13 +540,16 @@ void readStoreBinaryFileToSortedArray(ChemistryElement *& elements, int & numOfE
         elements = new ChemistryElement[numOfElements];
         unsortedFile.seekg(0, unsortedFile.beg);
         unsortedFile.read((char*)elements, sizeof(ChemistryElement) * numOfElements);
-           
-    }
-    unsortedFile.close();
+        unsortedFile.close();
+        selectionSort(atomics, elements, numOfElements);
+        cout << "\n\tSUCCESS: " << numOfElements << " (struct) data from " << fileName << " have been stored into dynamic allocated array and sorted by Atomic number\n\n";
 
-    //dualSort(atomics, elements, NUM_ELEMENTS);
-    selectionSort(atomics, elements, numOfElements);
-    cout << "\n\tSUCCESS: " << numOfElements << " (struct) data from " << fileName << " have been stored into dynamic allocated array and sorted by Atomic number\n\n";
+    }
+    else
+    {
+        cout << "\n\tERROR: binary data file, " << fileName << ", could be not found";
+    }
+    
     system("pause");
 }
 
