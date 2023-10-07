@@ -5,6 +5,7 @@
 #include "input.h"
 #include <iostream>
 #include <fstream>
+#include <vector>
 using namespace std;
 
 
@@ -32,7 +33,7 @@ ChemistryElement periodicTable[NUM_ELEMENTS] = { {1, 1.008, " H", "Hydrogen", 0,
                                         {9, 1.008, " F", " ", 0, 1, 0.0, 0.0, 1900, " "}, {10, 1.008, "Ne", " ", 0, 1, 0.0, 0.0, 1900, " "},
                                         {11, 1.008, "Na", " ", 0, 1, 0.0, 0.0, 1900, " "}, {12, 1.008, "Mg", " ", 0, 1, 0.0, 0.0, 1900, " "},
                                         {13, 1.008, "Al", "", 0, 1, 0.0, 0.0, 1900, ""}, {14, 1.008, "Si", "", 0, 1, 0.0, 0.0, 1900, ""},
-                                        {15, 1.008, "P", "", 0, 1, 0.0, 0.0, 1900, ""}, {16, 1.008, " S", "", 0, 1, 0.0, 0.0, 1900, ""},
+                                        {15, 1.008, " P", "", 0, 1, 0.0, 0.0, 1900, ""}, {16, 1.008, " S", "", 0, 1, 0.0, 0.0, 1900, ""},
                                         {17, 1.008, "Cl", " ", 0, 1, 0.0, 0.0, 1900, " "}, {18, 1.008, "Ar", " ", 0, 1, 0.0, 0.0, 1900, " "},
                                         {19, 1.008, " K", " ", 0, 1, 0.0, 0.0, 1900, " "}, {20, 1.008, "Ca", " ", 0, 1, 0.0, 0.0, 1900, " "},
                                         {21, 1.008, "Sc", " ", 0, 1, 0.0, 0.0, 1900, " "}, {22, 1.008, "Ti", " ", 0, 1, 0.0, 0.0, 1900, " "},
@@ -82,11 +83,12 @@ ChemistryElement periodicTable[NUM_ELEMENTS] = { {1, 1.008, " H", "Hydrogen", 0,
                                         {109, 1.008, "Mt", "", 0, 1, 0.0, 0.0, 1900, ""}, {110, 1.008, "Ds", "", 0, 1, 0.0, 0.0, 1900, ""},
                                         {111, 1.008, "Rg", "", 0, 1, 0.0, 0.0, 1900, ""}, {112, 1.008, "Cn", "", 0, 1, 0.0, 0.0, 1900, ""},
                                         {113, 1.008, "Nh", "", 0, 1, 0.0, 0.0, 1900, ""}, {114, 1.008, " H", "", 0, 1, 0.0, 0.0, 1900, ""},
-                                        {115, 1.008, "Mc", "", 0, 1, 0.0, 0.0, 1900, ""}, {116, 1.008, "Lv", "", 0, 1, 0.0, 0.0, 1900, ""}};
+                                        {115, 1.008, "Mc", "", 0, 1, 0.0, 0.0, 1900, ""}, {116, 1.008, "Lv", "", 0, 1, 0.0, 0.0, 1900, ""},
+                                        {117, 1.008, "Ts", "", 0, 1, 0.0, 0.0, 1900, ""}, {118, 1.008, "Og", "", 0, 1, 0.0, 0.0, 1900, ""} };
 
 // Prototypes
 char menuOption();
-void displayPeriodicTable();
+void displayPeriodicTable(bool bySymbol);
 int advanceBinaryFileOperationMenu();
 int dynamicAllocatedArrayMenu();
 int vectorMenu();
@@ -127,8 +129,7 @@ int main()
             break;
         default: cout << "\t\tERROR - Invalid option. Please re-enter."; break;
         }
-        cout << "\n";
-        system("pause");
+        
     } while (true);
 
     return EXIT_SUCCESS;
@@ -141,33 +142,33 @@ int main()
 char menuOption()
 {
     system("cls");
-    cout << "\t\t\tPERIODIC TABLE OF ELEMENTS BY SYMBOL \n\n";
-    displayPeriodicTable();
+    
+    displayPeriodicTable(true);
 
-    cout << "\n\tCMPR121 - Exam 1 (Chapter 12 .. 1) by Kim Hoang (9/23/2023) \n";
-    cout << "\n\t" << string(60, char(205));
+    cout << "\n\tCMPR121 - Exam 1 (Chapter 12 .. 1) by Kim Hoang (9/23/2023)";
+    cout << "\n\t" << string(90, char(205));
     cout << "\n\tA. Advance Binary File Operation (chapter 12) 50 pts";
     cout << "\n\tB. Dynamic Allocated Array (chapter 9) 50 pts";
     cout << "\n\tC. Vector (array)          (chapter 7) 25Pts Xtra";
-    cout << "\n\t" << string(60, char(196));
+    cout << "\n\t" << string(90, char(196));
     cout << "\n\tx. exit";
-    cout << "\n\t" << string(60, char(205));
+    cout << "\n\t" << string(90, char(205));
 
     return  inputChar("\n\tOption: ");
 }
 
 void displayElement(ChemistryElement element)
 {
-    cout << "\n\t" << "Atomic Number: " << element.atomicNumber;
-    cout << "\n\t" << "Symbol: " << element.symbol;
-    cout << "\n\t" << "Name: " << element.name;
-    cout << "\n\t" << "Atomic Mass: " << element.atomicMass;
-    cout << "\n\t" << "Boiling point: " << element.boilingPoint;
-    cout << "\n\t" << "Melting point: " << element.meltingPoint;
-    cout << "\n\t" << "Chemical Group Block: " << element.chemicalGroupBlock;
-    cout << "\n\t" << "Standard State: " << element.standardState;
-    cout << "\n\t" << "Year discovered: " << element.yearDiscovered;
-    cout << "\n\t" << "Discoverer: " << element.Discoverer;
+    cout << "\n\t" << "Atomic Number "  << "\t\t:" << element.atomicNumber;
+    cout << "\n\t" << "Symbol " << "\t\t:"  << element.symbol;
+    cout << "\n\t" << "Name " << "\t\t:" << element.name;
+    cout << "\n\t" << "Atomic Mass " << "\t\t:"  << element.atomicMass;
+    cout << "\n\t" << "Boiling point " << "\t\t:" << element.boilingPoint;
+    cout << "\n\t" << "Melting point " << "\t\t:" << element.meltingPoint;
+    cout << "\n\t" << "Chemical Group Block " << "\t\t:" << element.chemicalGroupBlock;
+    cout << "\n\t" << "Standard State " << "\t\t:" << element.standardState;
+    cout << "\n\t" << "Year discovered " << "\t\t:" << element.yearDiscovered;
+    cout << "\n\t" << "Discoverer " << "\t\t:"  << element.Discoverer;
 }
 
 void displayElementsFromBinaryFile()
@@ -180,7 +181,7 @@ void displayElementsFromBinaryFile()
         readBinary.read((char*)&element, sizeof(ChemistryElement));
         numberOfElementRead++;
         cout << "\n\t" << string(60, char(196));
-        cout << "\n\tElement # " << numberOfElementRead << " size (" << sizeof(ChemistryElement) << " bytes):";
+        cout << "\n\tElement (struct) # " << numberOfElementRead << " - " << sizeof(ChemistryElement) << " Bytes):";
         displayElement(element);
     }
     readBinary.close();
@@ -199,7 +200,7 @@ int elementExists(string element)
 
 void editAtomicNumber(ChemistryElement& element)
 {
-    int atomicNumber = inputInteger("\n Enter Atomic Number: ", 1, 118);
+    int atomicNumber = inputInteger("\n\t Enter Atomic Number: ", 1, 118);
     element.atomicNumber = atomicNumber;
 }
 
@@ -214,48 +215,38 @@ void editSymbol(ChemistryElement & element)
 }
 void editAtomicMass(ChemistryElement& element)
 {
-    double atomicMass = inputDouble("\n Enter Atomic Mass: ", 0, true);
+    double atomicMass = inputDouble("\n\t Enter Atomic Mass: ", 0, true);
     element.atomicMass = atomicMass;
+}
+void editName(ChemistryElement & element)
+{
+    char name[25] = "";
+    string nameStr = inputString("\n\tEnter Name", false);
+    strcpy_s(name, sizeof(nameStr.c_str()), nameStr.c_str());
+    while (!validateString(name, 1, 25))
+    {
+        cout << "\n Invalide Name.  Enter Name:";
+        strcpy_s(name, nameStr.size(), nameStr.c_str());
+    }
+    strcpy_s(element.name, sizeof(name), name);
 }
 
 void writeElementToFile(string fileName, ChemistryElement updatedElement, int elementPosition)
 {
-    cout << "\nUpdating element and then exit";
-    ofstream outfile("C:\\Users\\minhl\\Downloads\\temp.dat", std::ofstream::binary);
     
-    ifstream readBinary("C:\\Users\\minhl\\Downloads\\SORTED.dat", ios::binary | ios::out);
-    int numberOfElementRead = 0;
-    cout << "\n";
-    while (readBinary.good() && numberOfElementRead < NUM_ELEMENTS) {
-        ChemistryElement element;
-        readBinary.read((char*)&element, sizeof(ChemistryElement));
-        
-        outfile.seekp(numberOfElementRead * sizeof(ChemistryElement));
-        if (numberOfElementRead == elementPosition) 
-        {
-            outfile.write((char*)&updatedElement, sizeof(ChemistryElement));
-            displayElement(updatedElement);
-        } 
-        else
-        {
-            outfile.write((char*)&element, sizeof(ChemistryElement));
-            displayElement(element);
-        }
-        numberOfElementRead++;
+    std::fstream s(fileName, std::ios_base::binary | std::ios_base::in | std::ios_base::out);
+    if (s.good())
+    {
+        s.seekp(elementPosition * sizeof(ChemistryElement), std::ios_base::beg);
+        s.write((char*)&updatedElement, sizeof(ChemistryElement));
+        s.close();
+        cout << "\n\tElement has been successfully updated";
     }
-    readBinary.close();
-    outfile.close();
-
-    //replace SORTED.dat file content with temp.data
+    else
+    {
+        cout << "\n\tElement could not be updated because " << fileName << " could not be opened \n";
+    }
     
-    ofstream sorted("C:\\Users\\minhl\\Downloads\\SORTED.dat", ios::binary | ios::out);
-    ifstream tempFile("C:\\Users\\minhl\\Downloads\\temp.dat", ios::binary | ios::out);
-    ChemistryElement temp[NUM_ELEMENTS];
-    tempFile.read((char*)&temp, sizeof(ChemistryElement)*NUM_ELEMENTS);
-    sorted.write((char*)&temp, sizeof(ChemistryElement) * NUM_ELEMENTS);
-    sorted.close();
-    tempFile.close();
-
 }
 
 ChemistryElement editElementPropertiesMenu(ChemistryElement element, int elementPosition, bool& saveUpdates)
@@ -263,20 +254,23 @@ ChemistryElement editElementPropertiesMenu(ChemistryElement element, int element
     int option = -2; //inputInteger("\n\tOption: ", -1, 10);
     while ((option == -2))
     {
-        cout << "\n Edit Element Properties Menu";
-        cout << "\n 1. Atomic Number";
-        cout << "\n 2. Symbol";
-        cout << "\n 3. Name";
-        cout << "\n 4. Atomic Mass";
-        cout << "\n 5. Chemical Groupd Block";
-        cout << "\n 6. Standard State";
-        cout << "\n 7. Melting point";
-        cout << "\n 8. Boiling point";
-        cout << "\n 9. Discovered year";
-        cout << "\n 10. Discovered By";
-
-        cout << "\n-1. return without committing the updates";
-        cout << "\n 0. Committing the updates and return";
+        cout << "\n";
+        cout << "\n\t Edit Element Properties Menu";
+        cout << "\n\t" << string(90, char(205));
+        cout << "\n\t 1. Atomic Number";
+        cout << "\n\t 2. Symbol";
+        cout << "\n\t 3. Name";
+        cout << "\n\t 4. Atomic Mass";
+        cout << "\n\t 5. Chemical Groupd Block";
+        cout << "\n\t 6. Standard State";
+        cout << "\n\t 7. Melting point";
+        cout << "\n\t 8. Boiling point";
+        cout << "\n\t 9. Discovered year";
+        cout << "\n\t 10. Discovered By";
+        cout << "\n\t" << string(90, char(196));
+        cout << "\n\t-1. return without committing the updates";
+        cout << "\n\t 0. Committing the updates and return";
+        cout << "\n\t" << string(90, char(205));
         option = inputInteger("\n\tOption: ", -1, 10);
         while (option < -1 || option > 10)
         {
@@ -294,6 +288,7 @@ ChemistryElement editElementPropertiesMenu(ChemistryElement element, int element
             option = -2;
             break;
         case 3:
+            editName(element);
             option = -2;
             break;
         case 4:
@@ -340,8 +335,9 @@ ChemistryElement editElementPropertiesMenu(ChemistryElement element, int element
 
 void searchAndUpdateAnElement()
 {
-    system("cls");
-    string symbol = inputString("\nEnter an Element Symbol to search and update:", false);
+    //system("cls");
+    string symbol = inputString("\n\tEnter an Element Symbol to search and update:", false);   
+    cout << "\n\t" << string(90, char(196));
     int elementIndex = -1;
     string fileName = "C:\\Users\\minhl\\Downloads\\SORTED.dat";
     ifstream readBinary(fileName, ios::binary | ios::out | ios::in);
@@ -349,8 +345,8 @@ void searchAndUpdateAnElement()
     {
         readBinary.seekg(0, readBinary.end);
         ChemistryElement elements[NUM_ELEMENTS];
-        int length = readBinary.tellg();
-        int numOfElements = length / sizeof(ChemistryElement);
+        streampos length = readBinary.tellg();
+        size_t numOfElements = length / sizeof(ChemistryElement);
         readBinary.seekg(0, readBinary.beg);
         readBinary.read((char*)&elements, sizeof(ChemistryElement)*NUM_ELEMENTS);
 
@@ -364,82 +360,129 @@ void searchAndUpdateAnElement()
             if (element.symbol == symbol)
             {
                 displayElement(element);
-                editElementPropertiesMenu(element, i, saveUpdate);
+                ChemistryElement updated = editElementPropertiesMenu(element, i, saveUpdate);
                 if (saveUpdate)
                 {
-                    writeElementToFile(fileName, element, i);
+                    writeElementToFile(fileName, updated, i);
                 }
                 break;
             }
         }
-    }
-    
+    }  
     
 }
 
 
-void searchAndUpdateAnElement(ChemistryElement * elements, int numOfElements)
+void searchAndUpdateAnElement(ChemistryElement * elements, int numOfElements, bool clearScreen, bool bySymbol)
 {
-    system("cls");
-    string symbol = inputString("\nEnter an Element Symbol to search and update:", false);
+    if (clearScreen)
+    {
+        system("cls");
+    }
+
+    string prompt = "Symbol";
+    if (!bySymbol)
+    {
+        prompt = "Name";
+    }
+    string search = inputString("\n\tEnter an Element " + prompt + "  to search and update:", false);
     int elementIndex = -1;
 
     bool saveUpdate = false;
     for (int i = 0; i < numOfElements; i++)
     {
         ChemistryElement element = elements[i];
-        if (element.symbol == symbol)
+        if (element.symbol == search)
         {
             displayElement(element);
             ChemistryElement updatedElement = editElementPropertiesMenu(element, i, saveUpdate);
             if (saveUpdate)
             {
                 elements[i] = updatedElement;
+                cout << "\n\tElement has been successfully update \n";
+                system("pause");
             }
             break;
         }
     }
     
+    cout << "\n\tERROR: Element with " << prompt  << search << ", cannot be found. \n ";
+    system("pause");
 
+}
+
+void searchAndUpdateAnElementByAtomicNumber(ChemistryElement* elements, int numOfElements, bool clearScreen)
+{
+    if (clearScreen)
+    {
+        system("cls");
+    }
+
+    int atomic = inputInteger("\n\tEnter an Atomic Number (1.." + to_string(numOfElements) + ")  to search and update:", true);
+    int elementIndex = -1;
+
+    bool saveUpdate = false;
+    for (int i = 0; i < numOfElements; i++)
+    {
+        ChemistryElement element = elements[i];
+        if (element.atomicNumber == atomic)
+        {
+            displayElement(element);
+            ChemistryElement updatedElement = editElementPropertiesMenu(element, i, saveUpdate);
+            if (saveUpdate)
+            {
+                elements[i] = updatedElement;
+                cout << "\n\tElement has been successfully updated \n";
+                system("pause");
+                return;
+            }
+            break;
+        }
+    }
+
+    cout << "\n\tERROR: Element with Atomic Number, " << atomic << ", cannot be found. \n ";
+    system("pause");
 
 }
 
 int advanceBinaryFileOperationMenu()
 {
-    system("cls");
-    cout << "\t\t\tAdvance Binary File Operation \n\n";
-    cout << "\n\t" << string(60, char(205));
-    cout << "\n\t1. Read and Display ALL elements from binary data file ";
-    cout << "\n\t2. Search and update an element by Symbol from binary file";
-    cout << "\n\t" << string(60, char(196));
-    cout << "\n\t0. Return to main menu";
-    cout << "\n\t" << string(60, char(205));
+    int selection = -1;
+    do {
+        system("cls");
+        cout << "\tAdvance Binary File Operations Menu";
+        cout << "\n\t" << string(90, char(205));
+        cout << "\n\t1. Read and Display ALL elements from binary data file ";
+        cout << "\n\t2. Search and update an element by Symbol from binary file";
+        cout << "\n\t" << string(90, char(196));
+        cout << "\n\t0. Return to main menu";
+        cout << "\n\t" << string(90, char(205));
 
-    int selection = inputInteger("\n\tOption: ", 0, 2);
-
-
-    while (selection < 0 || selection > 2)
-    {
         selection = inputInteger("\n\tOption: ", 0, 2);
-    }
 
-    switch (selection) 
-    {
-    case 1:
-        displayElementsFromBinaryFile();
-        break;
+        switch (selection)
+        {
+        case 1:
+            displayElementsFromBinaryFile();
+            cout << "\n\n     ";
+            system("pause");
+            break;
 
-    case 2:
-        searchAndUpdateAnElement();
-        break;
+        case 2:
+            searchAndUpdateAnElement();
+            cout << "\n\n     ";
+            system("pause");
+            break;
 
-    case 0:
+        case 0:
+            cout << "\n";
+            system("pause");
+            break;
+        }
+        
+    } while (selection != 0);
 
-        break;
-    }
-    
-
-    return  inputInteger("\n\tOption: ", 0, 2);
+    return 1;// inputInteger("\n\tOption: ", 0, 2);
 }
 
 void selectionSort(int atomics[], ChemistryElement elements[],  int n)
@@ -485,7 +528,7 @@ void readStoreBinaryFileToSortedArray(ChemistryElement *& elements, int & numOfE
     if (unsortedFile.good())
     {
         unsortedFile.seekg(0, unsortedFile.end);
-        int length = unsortedFile.tellg();
+        streampos length = unsortedFile.tellg();
         numOfElements = length / sizeof(ChemistryElement);
         elements = new ChemistryElement[numOfElements];
         unsortedFile.seekg(0, unsortedFile.beg);
@@ -496,10 +539,36 @@ void readStoreBinaryFileToSortedArray(ChemistryElement *& elements, int & numOfE
 
     //dualSort(atomics, elements, NUM_ELEMENTS);
     selectionSort(atomics, elements, numOfElements);
-    cout << "\n" << numOfElements << " (struct) data from " << fileName << " have been stored into dynamic allocated array and sorted by Atomic number";
-    cout << "\nPress any key to continue...";
-    char c;
-    cin >> c;
+    cout << "\n\tSUCCESS: " << numOfElements << " (struct) data from " << fileName << " have been stored into dynamic allocated array and sorted by Atomic number\n\n";
+    system("pause");
+}
+
+void readStoreBinaryFileToVector(vector<ChemistryElement> & elements)
+{
+    string fileName = "C:\\Users\\minhl\\Downloads\\UNSORTED.dat";
+    
+    
+    //TODO: prompt for unsorted file and validate
+
+    ifstream unsortedFile(fileName, ios::binary | ios::in);
+    
+    size_t numOfElements = 0;
+    if (unsortedFile.good())
+    {
+        unsortedFile.seekg(0, unsortedFile.end);
+        streampos length = unsortedFile.tellg();
+        numOfElements = length / sizeof(ChemistryElement);
+        elements.resize(numOfElements);
+        unsortedFile.seekg(0, unsortedFile.beg);
+        unsortedFile.read((char*)elements.data(), sizeof(ChemistryElement) * numOfElements);
+
+    }
+    unsortedFile.close();
+
+   
+    cout << "\n\tSUCCESS: " << numOfElements << " (struct) data from " << fileName << " have been stored into into uosorted vector\n";
+    system("pause");
+    
 }
 
 void writeArrayToBinaryFile(ChemistryElement* elements, int numOfElement)
@@ -515,6 +584,8 @@ void writeArrayToBinaryFile(ChemistryElement* elements, int numOfElement)
             
         }
         outFile.write((char*)elements, sizeof(ChemistryElement) * numOfElement);
+        cout << "\n\t SUCCESS: " << numOfElement << " (struct) from array have been written to the binary data file, " << fileName << ".\n";
+        system("pause");
     }
     else
     {
@@ -526,23 +597,21 @@ int dynamicAllocatedArrayMenu()
     int selection = -1;
     ChemistryElement* elements = NULL;
     int count = 0;
-    while (selection != 0)
+    do 
     {
         system("cls");
-        cout << "\t\t\tDynamic Allocated Array Menu \n\n";
-        cout << "\n\t" << string(60, char(205));
+        displayPeriodicTable(false);
+        cout << "\n\t\Dynamic Allocated Array Menu \n";
+        cout << "\t" << string(90, char(205));
         cout << "\n\t1. Read, store ALL elements from binary file into the sorted array";
         cout << "\n\t2. Display ALL elements from the array";
         cout << "\n\t3. Search and update an element by Atomic Number for the array";
         cout << "\n\t4. Write All elements from the array into the binary file";
-        cout << "\n\t" << string(60, char(196));
+        cout << "\n\t" << string(90, char(196));
         cout << "\n\t0. Return to main menu";
-        cout << "\n\t" << string(60, char(205));
-        cout << "\n===============================================================================================";
+        cout << "\n\t" << string(90, char(205));
         selection = inputInteger("\n\tOption: ", 0, 4);
         
-
-
 
         while (selection < 0 || selection > 4)
         {
@@ -563,51 +632,123 @@ int dynamicAllocatedArrayMenu()
             }
             for (int i = 0; i < count; i++)
             {
-                cout << "\n";
+                cout << "\n\n\tarray element[" << i << "]";
+                cout << "\n\t" << string(90, char(196));
                 displayElement(elements[i]);
             }
-            cout << "\nPress any key to continue...";
-            char c;
-            cin >> c;
+            cout << "\n ";
+            system("pause");
             break;
         case 3:
-            searchAndUpdateAnElement(elements, count);
+           
+            //displayPeriodicTable(false);
+            searchAndUpdateAnElementByAtomicNumber(elements, count, false);
+
             break;
         case 4:
             writeArrayToBinaryFile(elements, count);
-            cout << "\nPress any key to continue...";
-            
-            cin >> c;
+
             break;
 
         case 0:
-
+            delete elements;
+            elements = NULL;
+            cout << "\n";
+            system("pause");
             break;
         }
         
-    }
-    delete elements;
-    elements = NULL;
+    } while (selection != 0);
+    
     return 1;
 }
 int vectorMenu()
 {
+    int selection = -1;
+    vector<ChemistryElement> elements;
+    
+    do
+    {
+        system("cls");
+        displayPeriodicTable(true);
+        
+        cout << "\n\tVector (array) Menu";
+        cout << "\n\t" << string(60, char(205));
+        cout << "\n\t1. Read, store ALL elements from binary file into the unsorted vector";
+        cout << "\n\t2. Display ALL elements from the vector";
+        cout << "\n\t3. Search and update an element by Name for the vector";
+        cout << "\n\t4. Write All elements from the vector into the binary file";
+        cout << "\n\t" << string(60, char(196));
+        cout << "\n\t0. Return to main menu";
+        cout << "\n\t" << string(60, char(205));
+        selection = inputInteger("\n\tOption: ", 0, 4);
+
+
+        while (selection < 0 || selection > 4)
+        {
+            selection = inputInteger("\n\tOption: ", 0, 2);
+        }
+
+        switch (selection)
+        {
+        case 1:
+            readStoreBinaryFileToVector(elements);
+            break;
+
+        case 2:
+            if (elements.size() == 0)
+            {
+                cout << "\n Binary file has not been loaded into the array.  Please perform step 1 first";
+                break;
+            }
+            for (size_t i = 0; i < elements.size(); i++)
+            {
+                cout << "\nvector element[" << i << "]";
+                cout << "\n\t" << string(60, char(205));
+                displayElement(elements[i]);
+            }
+            cout << "\n";
+            system("pause");
+            break;
+        case 3:
+            searchAndUpdateAnElement(elements.data(), elements.size(), false, false);
+            system("pause");
+            break;
+        case 4:
+            writeArrayToBinaryFile(elements.data(), elements.size());
+            cout << "\n";
+            system("pause");
+            break;
+
+        case 0:
+            
+            break;
+        }
+
+    } while (selection != 0);
     return 1;
 }
 
-void drawEmptyElements(int numEle)
+void drawEmptyElements(int numEle, bool bySymbol)
 {
+    string empty = "     ";
+    if (bySymbol)
+    {
+        empty = "     ";
+    }
     for (int i = 0; i < numEle; i++)
     {
-        cout << "     ";
+        cout << empty;
     }
 }
 
-void drawElements(int startingAtomicNum, int howManyEle)
+void drawElements(int startingAtomicNum, int howManyEle, bool bySymbol)
 {
+    
     for (int i = 0; i < howManyEle; i++)
     {
         int index = startingAtomicNum + i - 1;
+        string atomicNumberStr = "";
         switch (periodicTable[index].chemicalGroupBlock)
         {
         case 1:
@@ -635,55 +776,83 @@ void drawElements(int startingAtomicNum, int howManyEle)
             cout << "\033[1;38m";
             break;
         }
-        cout << "[" << periodicTable[index].symbol << "]";
+        if (bySymbol)
+        {
+            cout << "[ " << periodicTable[index].symbol << "]";
+        }
+        else
+        {
+            if (periodicTable[index].atomicNumber < 10)
+            {
+                atomicNumberStr = "  " + to_string(periodicTable[index].atomicNumber);
+            }
+            else if (periodicTable[index].atomicNumber < 100)
+            {
+                atomicNumberStr = " " + to_string(periodicTable[index].atomicNumber);
+            }
+            else
+            {
+                atomicNumberStr = "" + to_string(periodicTable[index].atomicNumber);
+            }
+            cout << "[" << atomicNumberStr  << "]";
+        }
         
     }
 }
 
-void displayPeriodicTable()
+void displayPeriodicTable(bool bySymbol)
 {
     int currentAtomic = 0;
+    if (bySymbol)
+    {
+        cout << "\t\t\tPERIODIC TABLE OF ELEMENTS BY SYMBOL \n\n";
+    }
+    else
+    {
+        cout << "\t\t\tPERIODIC TABLE OF ELEMENTS BY ATOMIC NUMBER \n\n";
+    }
     for (int row = 0; row < 10; row++)
     {
+        cout << "\t";
         if (row == 0)
         { 
-            drawElements(periodicTable[currentAtomic].atomicNumber, 1);
+            drawElements(periodicTable[currentAtomic].atomicNumber, 1, bySymbol);
             currentAtomic++;
-            drawEmptyElements(16);
-            drawElements(periodicTable[currentAtomic].atomicNumber, 1);
+            drawEmptyElements(16, bySymbol);
+            drawElements(periodicTable[currentAtomic].atomicNumber, 1, bySymbol);
             currentAtomic++;
             cout << "\n";
         }
         else if (row == 1 || row == 2)
         {
-            drawElements(periodicTable[currentAtomic].atomicNumber, 2);
+            drawElements(periodicTable[currentAtomic].atomicNumber, 2, bySymbol);
             currentAtomic += 2;
-            drawEmptyElements(10);
-            drawElements(periodicTable[currentAtomic].atomicNumber, 6);
+            drawEmptyElements(10, bySymbol);
+            drawElements(periodicTable[currentAtomic].atomicNumber, 6, bySymbol);
             currentAtomic += 6;
             cout << "\n";
         }
         else if (row == 3 || row == 4)
         {
-            drawElements(periodicTable[currentAtomic].atomicNumber, 18);
+            drawElements(periodicTable[currentAtomic].atomicNumber, 18, bySymbol);
             currentAtomic += 18;
             cout << "\n";
         }
         else if (row == 5 || row == 6)
         {
-            drawElements(periodicTable[currentAtomic].atomicNumber, 2);
+            drawElements(periodicTable[currentAtomic].atomicNumber, 2, bySymbol);
             currentAtomic += 2;
             if (row == 5)
             {
-                cout << " *  ";
-                drawElements(72, 15);
+                cout << "  *  ";
+                drawElements(72, 15, bySymbol);
                 currentAtomic += 15;
                
             }
             else
             {
-                cout << " ** ";
-                drawElements(104, 15);
+                cout << "  ** ";
+                drawElements(104, 15, bySymbol);
                 currentAtomic += 15;
             }
             cout << "\n";
@@ -695,18 +864,18 @@ void displayPeriodicTable()
         }
         else if (row == 8)
         {
-            drawEmptyElements(2);
-            cout << " *  ";
+            drawEmptyElements(2, bySymbol);
+            cout << "  *  ";
             cout << "\033[1;34m";
-            drawElements(57, 15);
+            drawElements(57, 15, bySymbol);
             cout << "\033[0m\n";
         }
         else if (row == 9)
         {
-            drawEmptyElements(2);
-            cout << " **  ";
+            drawEmptyElements(2, bySymbol);
+            cout << "  ** ";
             cout << "\033[1;30m";
-            drawElements(89, 15);
+            drawElements(89, 15, bySymbol);
             cout << "\033[0m\n";
         }
 
@@ -733,74 +902,6 @@ int inputIntegerWithDecimalCheck(string prompt, bool posNeg) {
     } while (true);
 }
 
-bool validateDate(string date)
-{
-    int month = stoi(date.substr(0, 2));
-    int day = stoi(date.substr(3, 2));
-    int year = stoi(date.substr(6, 4));
-
-    if (month < 1 || month > 12)
-    {
-        cout << "Month has to be between 1 and 12.  ";
-        return false;
-    }
-    if (year < 1900 || year > 2023)
-    {
-        cout << "Year has to be between 1900 and 2023.  ";
-        return false;
-    }
-    if (day < 1)
-    {
-        cout << "Day cannot be less than 1.  ";
-        return false;
-    }
-    if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12)
-    {
-        if (day > 31)
-        {
-            cout << "Day cannot be greater than 31 for this month.  ";
-            return false;
-        }
-    }
-    else if (month == 4 || month == 6 || month == 9 || month == 11)
-    {
-        if (day > 30)
-        {
-            cout << "Day cannot be greater than 30 for this month.  ";
-            return false;
-        }
-    }
-    else
-    {
-        if (day > 29)
-        {
-            cout << "Day cannot be greater than 29 for this month.  ";
-            return false;
-        }
-    }
-    return true;
-}
-
-
-
-char determineGrade(double average)
-{
-    if (average >= 91.0 && average <= 100.0) {
-        return 'A';
-    }
-    else if (average >= 81.0 && average <= 90.0) {
-        return 'B';
-    }
-    else if (average >= 71.0 && average <= 80.0) {
-        return 'C';
-    }
-    else if (average >= 61.0 && average <= 70.0) {
-        return 'D';
-    }
-    else {
-        return 'F';
-    }
-}
 
 
 
