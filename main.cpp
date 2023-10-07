@@ -460,6 +460,7 @@ void searchAndUpdateAnElement(string fileName)
       
         return;
     }
+
     string symbol = inputString("\n\tEnter an Element Symbol to search and update: ", false);   
      cout << "\n\t" << string(90, char(196));
     int elementIndex = -1;
@@ -555,7 +556,13 @@ void searchAndUpdateAnElementByAtomicNumber(ChemistryElement* elements, int numO
         system("cls");
     }
 
-    int atomic = inputInteger("\n\tEnter an Atomic Number (1.." + to_string(numOfElements) + ")  to search and update:", true);
+    if (elements == NULL)
+    {
+        cout << "\n Binary file has not been loaded into the array.  Please perform step 1 first.\n" << "\n";
+        system("pause");
+    }
+
+    int atomic = inputInteger("\n\tEnter an Atomic Number (1.." + to_string(numOfElements) + ")  to search and update: ", true);
     int elementIndex = -1;
 
     bool saveUpdate = false;
@@ -573,12 +580,18 @@ void searchAndUpdateAnElementByAtomicNumber(ChemistryElement* elements, int numO
                 system("pause");
                 return;
             }
+            else
+            {
+                cout << "\n";
+				system("pause");
+				return;
+            }
             break;
         }
     }
 
-    cout << "\n\tERROR: Element with Atomic Number, " << atomic << ", cannot be found. \n ";
-    system("pause");
+ /*   cout << "\n\tERROR: Element with Atomic Number, " << atomic << ", cannot be found. \n ";
+    system("pause");*/
 
 }
 
@@ -787,7 +800,8 @@ int dynamicAllocatedArrayMenu()
         case 2:
             if (elements == NULL)
             {
-                cout << "\n Binary file has not been loaded into the array.  Please perform step 1 first";
+                cout << "\n Binary file has not been loaded into the array.  Please perform step 1 first.\n" << "\n";
+                system("pause");
                 break;
             }
             for (int i = 0; i < count; i++)
@@ -800,12 +814,23 @@ int dynamicAllocatedArrayMenu()
             system("pause");
             break;
         case 3:
-           
+            if (elements == NULL)
+            {
+				cout << "\n Binary file has not been loaded into the array.  Please perform step 1 first.\n" << "\n";
+                system("pause");
+				break;
+			}
             //displayPeriodicTable(false);
             searchAndUpdateAnElementByAtomicNumber(elements, count, false);
 
             break;
         case 4:
+            if (elements == NULL)
+            {
+                cout << "Binary file has not been loaded into the array.  Please perform step 1 first.\n" << "\n";
+                system("pause");
+                break;
+            }
             writeArrayToBinaryFile(elements, count);
 
             break;
