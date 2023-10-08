@@ -127,7 +127,8 @@ int main()
             vectorMenu();
             break;
         default: 
-            cout << "\t\tERROR - Invalid option. Please re-enter."; 
+            cout << "\t\tERROR - Invalid input. Must be an alphabet character.\n\t";
+            system("pause");
             break;
         }
         
@@ -186,15 +187,22 @@ string displayElementsFromBinaryFile()
     ifstream readBinary(fileName, ios::binary | ios::out);
     int numberOfElementRead = 0;
     cout << "\n";
-    while (readBinary.good() && numberOfElementRead < NUM_ELEMENTS) {
-        ChemistryElement element;
-        readBinary.read((char*)&element, sizeof(ChemistryElement));
-        numberOfElementRead++;
-        cout << "\n\n\tElement (struct) # " << numberOfElementRead << " - " << sizeof(ChemistryElement) << " Bytes";
-        cout << "\n\t" << string(60, char(196));
-        displayElement(element);
+    if (readBinary.good())
+    {
+        while (readBinary.good() && numberOfElementRead < NUM_ELEMENTS) {
+            ChemistryElement element;
+            readBinary.read((char*)&element, sizeof(ChemistryElement));
+            numberOfElementRead++;
+            cout << "\n\n\tElement (struct) # " << numberOfElementRead << " - " << sizeof(ChemistryElement) << " Bytes";
+            cout << "\n\t" << string(60, char(196));
+            displayElement(element);
+        }
+        readBinary.close();
     }
-    readBinary.close();
+    else
+    {
+        cout << "\n\tERROR: could not open binary file, " << fileName << "\n";
+    }
     return fileName;
 }
 
@@ -255,7 +263,7 @@ void editAtomicMass(ChemistryElement& element)
 void editName(ChemistryElement & element)
 {
     char name[25] = "";
-    string nameStr = inputString("\n\tEnter Name", false);
+    string nameStr = inputString("\n\tEnter Name: ", false);
     strcpy_s(name, sizeof(nameStr.c_str()), nameStr.c_str());
     while (!validateString(name, 1, 25))
     {
@@ -462,26 +470,26 @@ void searchAndUpdateAnElement(string fileName)
     }
 
     string symbol = inputString("\n\tEnter an Element Symbol to search and update: ", false);   
-     cout << "\n\t" << string(90, char(196));
+    cout << "\n\t" << string(90, char(196));
     int elementIndex = -1;
     
-    ifstream readBinary(fileName, ios::binary | ios::out | ios::in);
+    fstream readBinary(fileName, ios::binary | ios::in );
     if (readBinary.good())
     {
+        bool found = false;
         readBinary.seekg(0, readBinary.end);
         ChemistryElement elements[NUM_ELEMENTS];
         streampos length = readBinary.tellg();
         size_t numOfElements = length / sizeof(ChemistryElement);
-        readBinary.seekg(0, readBinary.beg);
-        readBinary.read((char*)&elements, sizeof(ChemistryElement)*NUM_ELEMENTS);
+
 
         bool saveUpdate = false;
         for (int i = 0; i < numOfElements; i++)
         {
             ChemistryElement element;
-            readBinary.seekg(0, readBinary.beg + (i * sizeof(ChemistryElement)));
+            readBinary.seekp(i * sizeof(ChemistryElement));
             readBinary.read((char*)&element, sizeof(ChemistryElement));
-            readBinary.close();
+            
             if (element.symbol == symbol)
             {
                 displayElement(element);
@@ -490,10 +498,21 @@ void searchAndUpdateAnElement(string fileName)
                 {
                     writeElementToFile(fileName, updated, i);
                 }
+                found = true;
                 break;
             }
         }
+        readBinary.close();
+        if (found == false)
+        {
+            cout << "\n\tERROR: Element Symbol, " << symbol << ", could not be found. \n";
+        }
     }  
+    else
+    {
+        cout << "\n\tERROR: Binary data file, " << fileName << ", could not be opened. \n";
+    }
+
     
 }
 
@@ -540,8 +559,8 @@ void searchAndUpdateAnElement(ChemistryElement * elements, int numOfElements, bo
         }
     }
     
-    cout << "\n\tERROR: Element with " << prompt  << search << ", cannot be found. \n ";
-    system("pause");
+    cout << "\n\tERROR: Element with " << prompt  << " " << search << ", cannot be found. \n ";
+    
 
 }
 
