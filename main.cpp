@@ -545,14 +545,14 @@ void searchAndUpdateAnElement(ChemistryElement * elements, int numOfElements, bo
     for (int i = 0; i < numOfElements; i++)
     {
         ChemistryElement element = elements[i];
-        if (element.symbol == search)
+        if (element.name == search)
         {
             displayElement(element);
             ChemistryElement updatedElement = editElementPropertiesMenu(element, i, saveUpdate);
             if (saveUpdate)
             {
                 elements[i] = updatedElement;
-                cout << "\n\tElement has been successfully updated \n";
+                cout << "\n\tElement has been successfully updated \n\n";
                 system("pause");
             }
             break;
