@@ -538,7 +538,7 @@ void searchAndUpdateAnElement(ChemistryElement * elements, int numOfElements, bo
     {
         prompt = "Name";
     }
-    string search = inputString("\n\tEnter an Element " + prompt + "  to search and update:", false);
+    string search = inputString("\n\tEnter an Element " + prompt + " to search and update:", false);
     int elementIndex = -1;
 
     bool saveUpdate = false;
@@ -552,15 +552,14 @@ void searchAndUpdateAnElement(ChemistryElement * elements, int numOfElements, bo
             if (saveUpdate)
             {
                 elements[i] = updatedElement;
-                cout << "\n\tElement has been successfully update \n";
+                cout << "\n\tElement has been successfully updated \n";
                 system("pause");
             }
             break;
         }
     }
     
-    cout << "\n\tERROR: Element with " << prompt  << " " << search << ", cannot be found. \n ";
-    
+    //cout << "\n\tERROR: Element with " << prompt  << " " << search << ", cannot be found. \n ";
 
 }
 
