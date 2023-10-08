@@ -6,11 +6,15 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+
 using namespace std;
 
 
 const int maxSize = 100;
 const int NUM_ELEMENTS = 118;
+
+string ChemicalGroupBlock[11] = { "unknown", "Nonmetal", "Nobel Gas", "Alkali Metal", "Alkaline Earth Metal", "Post-transition Metal", "Metalloid", "halogen", "Nonmetal", "lanthanide", "Actinide"};
+string StandardState[4] = { "unknown", "Gas", "Liquid", "Solia" };
 
 struct ChemistryElement
 {
@@ -160,7 +164,7 @@ char menuOption()
 }
 
 // Function: displayElement(ChemistryElement element)
-// Precondition: User must enter a valid element
+// Precondition: User must enter a valid elementa
 // Postcondition: Displays the element
 
 void displayElement(ChemistryElement element)
@@ -168,11 +172,17 @@ void displayElement(ChemistryElement element)
     cout << "\n\t" << "Atomic Number "  << "\t\t\t\t: " << element.atomicNumber;
     cout << "\n\t" << "Symbol " << "\t\t\t\t\t: "  << element.symbol;
     cout << "\n\t" << "Name " << "\t\t\t\t\t: " << element.name;
-    cout << "\n\t" << "Atomic Mass " << "\t\t\t\t: "  << element.atomicMass;
-    cout << "\n\t" << "Chemical Group Block " << "\t\t\t: " << element.chemicalGroupBlock;
-    cout << "\n\t" << "Standard State " << "\t\t\t\t: " << element.standardState;
-    cout << "\n\t" << "Boiling point " << "\t\t\t\t: " << element.boilingPoint - 273.15 << " C (" << element.meltingPoint << " K)";
-    cout << "\n\t" << "Melting point " << "\t\t\t\t: " << element.meltingPoint - 273.15 << " C (" << element.meltingPoint << " K)";
+    cout << "\n\t" << "Atomic Mass " << "\t\t\t\t: "  << element.atomicMass << " u";
+    if (element.chemicalGroupBlock > -1 && element.chemicalGroupBlock < 11)
+    {
+        cout << "\n\t" << "Chemical Group Block " << "\t\t\t: " << ChemicalGroupBlock[element.chemicalGroupBlock];
+    }
+    if (element.standardState > -1 && element.standardState < 4)
+    {
+        cout << "\n\t" << "Standard State " << "\t\t\t\t: " << StandardState[element.standardState];
+    }
+    cout << "\n\t" << "Melting point " << "\t\t\t\t: " << element.meltingPoint - 273.15 << "\370" << "C (" << element.meltingPoint << " K)";
+    cout << "\n\t" << "Boiling point " << "\t\t\t\t: " << element.boilingPoint - 273.15 <<  "\370" << "C (" << element.meltingPoint << " K)";
     cout << "\n\t" << "Year discovered " << "\t\t\t: " << element.yearDiscovered;
     cout << "\n\t" << "Discoverer " << "\t\t\t\t: "  << element.Discoverer;
 }
@@ -201,7 +211,7 @@ string displayElementsFromBinaryFile()
     }
     else
     {
-        cout << "\n\tERROR: could not open binary file, " << fileName << "\n";
+        cout << "\tERROR: Binary data file, " << fileName << ", cannot be found.";
     }
     return fileName;
 }
@@ -239,9 +249,9 @@ void editAtomicNumber(ChemistryElement& element)
 void editSymbol(ChemistryElement & element)
 {
     string symbol = inputString("\n Enter Symbol: ", false);
-    while (symbol.length() < 1 || symbol.length() > 3)
+    while (symbol.length()  == 0 || symbol.length() > 2)
     {
-        symbol = inputString("\n Enter Symbol: ", false);
+        symbol = inputString("\nSymbol cannot be longer than 2 characters.  Enter Symbol: ", false);
     }
     strncpy_s(element.symbol, symbol.c_str(), symbol.length());
 }
@@ -262,24 +272,22 @@ void editAtomicMass(ChemistryElement& element)
 
 void editName(ChemistryElement & element)
 {
-    char name[25] = "";
     string nameStr = inputString("\n\tEnter Name: ", false);
-    strcpy_s(name, sizeof(nameStr.c_str()), nameStr.c_str());
-    while (!validateString(name, 1, 25))
+
+    while (nameStr.length() > 25)
     {
-        cout << "\n Invalide Name.  Enter Name:";
-        strcpy_s(name, nameStr.size(), nameStr.c_str());
+        nameStr = inputString("\n\tElement name cannot be longer than 25 characters.  Enter Name: ", false);
     }
-    strcpy_s(element.name, sizeof(name), name);
+    strcpy_s(element.name, nameStr.length() + 1, nameStr.c_str());
 }
 
 // Function: editChemicalGroupBlock(ChemistryElement& element)
 // Precondition: User must enter a valid chemical group block
-// Postcondition: Edits the chemical group block of the element
+// Postcondition: Edits the chemical group block of the element5 
 
 void editChemicalGroupBlock(ChemistryElement& element)
 {
-	int chemicalGroupBlock = inputInteger("\n\t Enter Chemical Group Block: ", 1, 8);
+	int chemicalGroupBlock = inputInteger("\n\t Enter the Chemical Group Block (0 - unknown, 1 - Nonmetal, 2 - Nobel Gas, 3 - Alkali Metal, 4 - Alkaline Earth Metal, 5 - Post-transition Metal, 6 - Metalloid, 7 - Halogen, 8 - Nonmetal, 9 - Lanthanide, or 10 - Actinide) : ", 0, 10);
 	element.chemicalGroupBlock = chemicalGroupBlock;
 }
 
@@ -289,7 +297,7 @@ void editChemicalGroupBlock(ChemistryElement& element)
 
 void editStandardState(ChemistryElement& element)
 {
-	int standardState = inputInteger("\n\t Enter Standard State: ", 1, 3);
+	int standardState = inputInteger("\n\t Enter the Standard State (0 - unknown, 1 - Gas, 2 - Liquid, or 3 - Solid) : ", 0, 3);
 	element.standardState = standardState;
 }
 
@@ -299,7 +307,7 @@ void editStandardState(ChemistryElement& element)
 
 void editMeltingPoint(ChemistryElement& element)
 {
-	double meltingPoint = inputDouble("\n\t Enter Melting Point: ", 0, true);
+	double meltingPoint = inputDouble("\n\t Enter the Melting Point (K): ");
 	element.meltingPoint = meltingPoint;
 }
 
@@ -309,7 +317,7 @@ void editMeltingPoint(ChemistryElement& element)
 
 void editBoilingPoint(ChemistryElement& element)
 {
-	double boilingPoint = inputDouble("\n\t Enter Boiling Point: ", 0, true);
+	double boilingPoint = inputDouble("\n\t Enter the Boiling Point (K): ");
 	element.boilingPoint = boilingPoint;
 }
 
@@ -319,7 +327,7 @@ void editBoilingPoint(ChemistryElement& element)
 
 void editYearDiscovered(ChemistryElement& element)
 {
-	int yearDiscovered = inputInteger("\n\t Enter Year Discovered: ", 0, 2021);
+	int yearDiscovered = inputInteger("\n\t Enter Year Discovered: ", 0, 3000);
 	element.yearDiscovered = yearDiscovered;
 }
 
@@ -329,15 +337,13 @@ void editYearDiscovered(ChemistryElement& element)
 
 void editDiscoverer(ChemistryElement& element)
 {
-	char discoverer[100] = "";
-	string discovererStr = inputString("\n\tEnter Discoverer", false);
-	strcpy_s(discoverer, sizeof(discovererStr.c_str()), discovererStr.c_str());
-    while (!validateString(discoverer, 1, 100))
+	string discovererStr = inputString("\n\tEnter the Discoverer(s): ", false);	
+    while (discovererStr.length() > 100)
     {
-		cout << "\n Invalide Discoverer.  Enter Discoverer:";
-		strcpy_s(discoverer, discovererStr.size(), discovererStr.c_str());
+        discovererStr = inputString("\n\tDiscoverer(s) cannot be longger than 100 characters.  Ennter the Discoverer(s)", false);
 	}
-	strcpy_s(element.Discoverer, sizeof(discoverer), discoverer);
+    strcpy_s(element.Discoverer, discovererStr.length() + 1, discovererStr.c_str());
+
 }
 
 // Function: writeElementToFile(string fileName, ChemistryElement updatedElement, int elementPosition)
@@ -470,7 +476,7 @@ void searchAndUpdateAnElement(string fileName)
     }
 
     string symbol = inputString("\n\tEnter an Element Symbol to search and update: ", false);   
-    cout << "\n\t" << string(90, char(196));
+   
     int elementIndex = -1;
     
     fstream readBinary(fileName, ios::binary | ios::in );
@@ -481,8 +487,7 @@ void searchAndUpdateAnElement(string fileName)
         ChemistryElement elements[NUM_ELEMENTS];
         streampos length = readBinary.tellg();
         size_t numOfElements = length / sizeof(ChemistryElement);
-
-
+       
         bool saveUpdate = false;
         for (int i = 0; i < numOfElements; i++)
         {
@@ -492,6 +497,8 @@ void searchAndUpdateAnElement(string fileName)
             
             if (element.symbol == symbol)
             {
+                cout << "\n\t" << string(90, char(196));
+
                 displayElement(element);
                 ChemistryElement updated = editElementPropertiesMenu(element, i, saveUpdate);
                 if (saveUpdate)
@@ -505,12 +512,12 @@ void searchAndUpdateAnElement(string fileName)
         readBinary.close();
         if (found == false)
         {
-            cout << "\n\tERROR: Element Symbol, " << symbol << ", could not be found. \n";
+            cout << "\n\tERROR: Element cannot be found from binary file.";
         }
     }  
     else
     {
-        cout << "\n\tERROR: Binary data file, " << fileName << ", could not be opened. \n";
+        cout << "\n\tERROR: binary data file, " << fileName << ", cannot be found.";
     }
 
     
@@ -545,21 +552,22 @@ void searchAndUpdateAnElement(ChemistryElement * elements, int numOfElements, bo
     for (int i = 0; i < numOfElements; i++)
     {
         ChemistryElement element = elements[i];
-        if (element.symbol == search)
+        if (element.name == search)
         {
             displayElement(element);
             ChemistryElement updatedElement = editElementPropertiesMenu(element, i, saveUpdate);
             if (saveUpdate)
             {
                 elements[i] = updatedElement;
-                cout << "\n\tElement has been successfully updated \n";
+                cout << "\n\tElement has been successfully updated \n\n";
                 system("pause");
             }
-            break;
+            return;
         }
     }
     
-    //cout << "\n\tERROR: Element with " << prompt  << " " << search << ", cannot be found. \n ";
+    cout << "\n\tERROR: Element with " << prompt  << ", " << search << ", cannot be found. \n ";
+    system("pause");
 
 }
 
@@ -576,11 +584,11 @@ void searchAndUpdateAnElementByAtomicNumber(ChemistryElement* elements, int numO
 
     if (elements == NULL)
     {
-        cout << "\n Binary file has not been loaded into the array.  Please perform step 1 first.\n" << "\n";
+        cout << "\n Binary file has not been loaded into the array.  Please perform step #1 first.\n" << "\n";
         system("pause");
     }
-
-    int atomic = inputInteger("\n\tEnter an Atomic Number (1.." + to_string(numOfElements) + ")  to search and update: ", true);
+    
+    int atomic = inputInteger("\n\tEnter an Atomic Number (1.." + to_string(numOfElements) + ")  to search and update: ", 1, numOfElements);
     int elementIndex = -1;
 
     bool saveUpdate = false;
@@ -701,7 +709,7 @@ void readStoreBinaryFileToSortedArray(ChemistryElement *& elements, int & numOfE
 
     ifstream unsortedFile(fileName, ios::binary | ios::in);
     numOfElements = 0;
-    ChemistryElement * dynamicArray = NULL;
+    
     if (unsortedFile.good())
     {
         unsortedFile.seekg(0, unsortedFile.end);
@@ -761,7 +769,7 @@ void writeArrayToBinaryFile(ChemistryElement* elements, int numOfElement)
 {
     if (elements != NULL)
     {
-        string fileName = inputString("\nEnter the binary file name to write to:", false);
+        string fileName = inputString("\nEnter the binary file name to write to: ", false);
         ofstream outFile;
         outFile.open(fileName, ios::out);
         while (!outFile.is_open())
@@ -771,6 +779,7 @@ void writeArrayToBinaryFile(ChemistryElement* elements, int numOfElement)
         }
         outFile.write((char*)elements, sizeof(ChemistryElement) * numOfElement);
         cout << "\n\t SUCCESS: " << numOfElement << " (struct) from array have been written to the binary data file, " << fileName << ".\n";
+        outFile.close();
         system("pause");
     }
     else
@@ -838,7 +847,6 @@ int dynamicAllocatedArrayMenu()
                 system("pause");
 				break;
 			}
-            //displayPeriodicTable(false);
             searchAndUpdateAnElementByAtomicNumber(elements, count, false);
 
             break;
@@ -922,7 +930,7 @@ int vectorMenu()
             break;
         case 3:
             searchAndUpdateAnElement(elements.data(), elements.size(), false, false);
-            system("pause");
+            
             break;
         case 4:
             writeArrayToBinaryFile(elements.data(), elements.size());
