@@ -100,8 +100,8 @@ ChemistryElement periodicTable[NUM_ELEMENTS] = { {1, 1.008, "H", "Hydrogen", 1, 
                                         {69, 168.934, "Tm", "Thulium", 3, 3, 1818, 2223, 1879, "Per Teodor Cleve"},
                                         {70, 173.045, "Yb", "Ytterbium", 3, 3, 1092, 1469, 1878, "Jean Charles Galissard de Marignac"},
                                         {71, 174.966, "Lu", "Lutetium", 3, 3, 1925, 3675, 1907, "Georges Urbain, Charles James"},
-                                        {72, 178.49, "Hf", "Hafnium", 3, 4, 2506, 4876, 1923, "Dirk Coster, George de Hevesy"},
-                                        {73, 180.947, "Ta", "Tantalum", 3, 5, 3290, 5731, 1802, "Anders Gustaf Ekeberg"},
+                                        {72, 178.49, "Fr", "Hafnium", 3, 4, 2506, 4876, 1923, "Dirk Coster, George de Hevesy"},
+                                        {73, 180.947, "Ra", "Tantalum", 3, 5, 3290, 5731, 1802, "Anders Gustaf Ekeberg"},
                                         {74, 183.84, "W", "Tungsten", 3, 6, 3695, 5828, 1783, "Carl Wilhelm Scheele"},
                                         {75, 186.207, "Re", "Rhenium", 3, 7, 3459, 5869, 1925, "Walter Noddack, Ida Tacke, Otto Berg"},
                                         {76, 190.23, "Os", "Osmium", 3, 8, 3306, 5285, 1803, "Smithson Tennant"},
@@ -408,20 +408,30 @@ void editDiscoverer(ChemistryElement& element)
 // Precondition: User must enter a valid file name
 // Postcondition: Writes the element to the file
 
-void writeElementToFile(string fileName, ChemistryElement updatedElement, int elementPosition)
+void writeElementToFile(string fileName, ChemistryElement updatedElement, int elementPosition, bool showResults)
 {
     
-    fstream s(fileName, ios_base::binary | ios_base::in | ios_base::out);
-    if (s.good())
+    //fstream s(fileName, ios_base::binary | ios_base::in | ios_base::out);
+    ofstream outFile;
+    outFile.open(fileName, ios_base::binary | ios_base::in | ios_base::out);
+
+    if (!outFile.good())
     {
-        s.seekp(elementPosition * sizeof(ChemistryElement), ios_base::beg);
-        s.write((char*)&updatedElement, sizeof(ChemistryElement));
-        s.close();
-        cout << "\n\tElement has been successfully updated";
+        outFile.open(fileName, ios_base::binary | ios_base::out);
+    }
+    
+    if (outFile.good())
+    {
+        outFile.seekp(elementPosition * sizeof(ChemistryElement), ios_base::beg);
+        outFile.write((char*)&updatedElement, sizeof(ChemistryElement));
+        outFile.close();
+        if (showResults)
+            cout << "\n\tElement has been successfully updated";
     }
     else
     {
-        cout << "\n\tElement could not be updated because " << fileName << " could not be opened \n";
+        if (showResults)
+            cout << "\n\tElement could not be updated because " << fileName << " could not be opened \n";
     }
     
 }
@@ -561,7 +571,7 @@ void searchAndUpdateAnElement(string fileName)
                 ChemistryElement updated = editElementPropertiesMenu(element, i, saveUpdate);
                 if (saveUpdate)
                 {
-                    writeElementToFile(fileName, updated, i);
+                    writeElementToFile(fileName, updated, i, true);
                 }
                 found = true;
                 break;
@@ -828,7 +838,11 @@ void writeArrayToBinaryFile(ChemistryElement* elements, int numOfElement)
     if (elements != NULL)
     {
         string fileName = inputString("\nEnter the binary file name to write to: ", false);
-        ofstream outFile;
+        for (int i = 0; i < numOfElement; i++)
+        {
+            writeElementToFile(fileName, elements[i], i, false);
+        }
+        /*ofstream outFile;
         outFile.open(fileName, ios::out);
         while (!outFile.is_open())
         {
@@ -836,8 +850,9 @@ void writeArrayToBinaryFile(ChemistryElement* elements, int numOfElement)
             
         }
         outFile.write((char*)elements, sizeof(ChemistryElement) * numOfElement);
+        
+        outFile.close();*/
         cout << "\n\t SUCCESS: " << numOfElement << " (struct) from array have been written to the binary data file, " << fileName << ".\n";
-        outFile.close();
         system("pause");
     }
     else
@@ -1035,6 +1050,9 @@ void drawElements(int startingAtomicNum, int howManyEle, bool bySymbol)
         string atomicNumberStr = "";
         switch (periodicTable[index].chemicalGroupBlock)
         {
+        case 0:
+            cout << "\033[1;30m";
+            break;
         case 1:
             cout << "\033[1;31m";
             break;
@@ -1059,10 +1077,23 @@ void drawElements(int startingAtomicNum, int howManyEle, bool bySymbol)
         case 8:
             cout << "\033[1;38m";
             break;
+        case 9:
+            cout << "\033[1;39m";
+            break;
+        case 10:
+            cout << "\033[1;40m";
+            break;
         }
         if (bySymbol)
         {
-            cout << "[ " << periodicTable[index].symbol << "]";
+            if (strlen(periodicTable[index].symbol) == 1)
+            {
+                cout << "[  " << periodicTable[index].symbol << "]";
+            }
+            else 
+            {
+                cout << "[ " << periodicTable[index].symbol << "]";
+            }
         }
         else
         {
@@ -1154,17 +1185,17 @@ void displayPeriodicTable(bool bySymbol)
         {
             drawEmptyElements(2, bySymbol);
             cout << "  *  ";
-            cout << "\033[1;34m";
+            //cout << "\033[1;34m";
             drawElements(57, 15, bySymbol);
-            cout << "\033[0m\n";
+            cout << "\n";
         }
         else if (row == 9)
         {
             drawEmptyElements(2, bySymbol);
             cout << "  ** ";
-            cout << "\033[1;30m";
+            //cout << "\033[1;30m";
             drawElements(89, 15, bySymbol);
-            cout << "\033[0m\n";
+            cout << "\n";
         }
 
     }
