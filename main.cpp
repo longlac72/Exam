@@ -13,7 +13,7 @@ using namespace std;
 const int maxSize = 100;
 const int NUM_ELEMENTS = 118;
 
-string ChemicalGroupBlock[11] = { "unknown", "Nonmetal", "Nobel Gas", "Alkali Metal", "Alkaline Earth Metal", "Post-transition Metal", "Metalloid", "halogen", "Nonmetal", "lanthanide", "Actinide" };
+string ChemicalGroupBlock[11] = { "unknown", "Nonmetal", "Noble Gas", "Alkali Metal", "Alkaline Earth Metal", "Post-transition Metal", "Metalloid", "Halogen", "Nonmetal", "Lanthanide", "Actinide" };
 string StandardState[4] = { "unknown", "Gas", "Liquid", "Solia" };
 
 struct ChemistryElement
