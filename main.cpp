@@ -13,7 +13,7 @@ using namespace std;
 const int maxSize = 100;
 const int NUM_ELEMENTS = 118;
 
-string ChemicalGroupBlock[11] = { "unknown", "Nonmetal", "Nobel Gas", "Alkali Metal", "Alkaline Earth Metal", "Post-transition Metal", "Metalloid", "halogen", "Nonmetal", "lanthanide", "Actinide"};
+string ChemicalGroupBlock[11] = { "unknown", "Nonmetal", "Nobel Gas", "Alkali Metal", "Alkaline Earth Metal", "Post-transition Metal", "Metalloid", "halogen", "Nonmetal", "lanthanide", "Actinide" };
 string StandardState[4] = { "unknown", "Gas", "Liquid", "Solia" };
 
 struct ChemistryElement
@@ -41,8 +41,8 @@ ChemistryElement periodicTable[NUM_ELEMENTS] = { {1, 1.008, "H", "Hydrogen", 1, 
                                         {10, 20.180, "Ne", "Neon", 1, 18, -248.59, -246.04, 1898, "William Ramsay"},
                                         {11, 22.990, "Na", "Sodium", 3, 1, 97.72, 883, 1807, "Sir Humphry Davy"},
                                         {12, 24.305, "Mg", "Magnesium", 3, 2, 650.6, 1363, 1828, "Joseph Louis Gay-Lussac"},
-                                        {13, 26.982, "Al", "Aluminum", 3, 13, 660.37, 2792, 1825, "Friedrich Wöhler"},
-                                        {14, 28.086, "Si", "Silicon", 3, 14, 1414, 3538, 1823, "Jöns Jakob Berzelius"},
+                                        {13, 26.982, "Al", "Aluminum", 3, 13, 660.37, 2792, 1825, "Friedrich W?hler"},
+                                        {14, 28.086, "Si", "Silicon", 3, 14, 1414, 3538, 1823, "J?ns Jakob Berzelius"},
                                         {15, 30.974, "P", "Phosphorus", 3, 15, 44.2, 553.7, 1660, "Hennig Brand"},
                                         {16, 32.065, "S", "Sulfur", 3, 16, 119.2, 717.8, 0, "Unknown"},
                                         {17, 35.453, "Cl", "Chlorine", 1, 17, -101.5, -34.04, 1774, "Carl Wilhelm Scheele"},
@@ -51,7 +51,7 @@ ChemistryElement periodicTable[NUM_ELEMENTS] = { {1, 1.008, "H", "Hydrogen", 1, 
                                         {20, 40.078, "Ca", "Calcium", 3, 2, 1115, 1757, 1808, "Sir Humphry Davy"},
                                         {21, 44.956, "Sc", "Scandium", 3, 3, 1814, 3345, 1879, "Lars Fredrik Nilson"},
                                         {22, 47.867, "Ti", "Titanium", 3, 4, 1941, 3560, 1791, "William Gregor"},
-                                        {23, 50.942, "V", "Vanadium", 3, 5, 2183, 3407, 1801, "Andrés Manuel del Río"},
+                                        {23, 50.942, "V", "Vanadium", 3, 5, 2183, 3407, 1801, "Andr?s Manuel del R?o"},
                                         {24, 51.996, "Cr", "Chromium", 3, 6, 2180, 3076, 1797, "Louis Nicolas Vauquelin"},
                                         {25, 54.938, "Mn", "Manganese", 3, 7, 1519, 2334, 1774, "Johan Gottlieb Gahn"},
                                         {26, 55.845, "Fe", "Iron", 3, 8, 1811, 3134, 0, "Meteorites"},
@@ -59,11 +59,11 @@ ChemistryElement periodicTable[NUM_ELEMENTS] = { {1, 1.008, "H", "Hydrogen", 1, 
                                         {28, 58.693, "Ni", "Nickel", 3, 10, 1768, 3003, 1751, "Axel Fredrik Cronstedt"},
                                         {29, 63.546, "Cu", "Copper", 3, 11, 1357, 2835, 0, "Unknown"},
                                         {30, 65.409, "Zn", "Zinc", 3, 12, 692.68, 907, 0, "Unknown"},
-                                        {31, 69.723, "Ga", "Gallium", 3, 13, 302.9, 2403, 1875, "Paul Émile Lecoq de Boisbaudran"},
+                                        {31, 69.723, "Ga", "Gallium", 3, 13, 302.9, 2403, 1875, "Paul ?mile Lecoq de Boisbaudran"},
                                         {32, 72.640, "Ge", "Germanium", 3, 14, 1211.4, 3106, 1886, "Clemens Winkler"},
                                         {33, 74.922, "As", "Arsenic", 3, 15, 1090, 887, 0, "Unknown"},
                                         {34, 78.971, "Se", "Selenium", 3, 16, 221.1, 494.5, 0, "Unknown"},
-                                        {35, 79.904, "Br", "Bromine", 2, 17, -7.22, 59.5, 1826, "Carl Jacob Löwig"},
+                                        {35, 79.904, "Br", "Bromine", 2, 17, -7.22, 59.5, 1826, "Carl Jacob L?wig"},
                                         {36, 83.798, "Kr", "Krypton", 1, 18, -157.4, -153.4, 1898, "Sir William Ramsay"},
                                         {37, 85.467, "Rb", "Rubidium", 3, 1, 39.3, 961, 1861, "Robert Bunsen"},
                                         {38, 87.62, "Sr", "Strontium", 3, 2, 1050, 1384, 1790, "Adair Crawford"},
@@ -80,28 +80,28 @@ ChemistryElement periodicTable[NUM_ELEMENTS] = { {1, 1.008, "H", "Hydrogen", 1, 
                                         {49, 114.818, "In", "Indium", 3, 13, 429.8, 2345, 1863, "Ferdinand Reich"},
                                         {50, 118.71, "Sn", "Tin", 3, 14, 505.08, 2875, 0, "Unknown"},
                                         {51, 121.76, "Sb", "Antimony", 3, 15, 903, 1807,},
-                                        {52, 127.6, "Te", "Tellurium", 3, 16, 722.66, 1307, 1782, "Franz-Joseph Müller von Reichenstein"},
+                                        {52, 127.6, "Te", "Tellurium", 3, 16, 722.66, 1307, 1782, "Franz-Joseph M?ller von Reichenstein"},
                                         {53, 126.905, "I", "Iodine", 3, 17, 114.7, 461, 1811, "Bernard Courtois"},
                                         {54, 131.293, "Xe", "Xenon", 1, 18, -111.9, -108.1, 1898, "Morris Travers"},
                                        {55, 132.905, "Cs", "Cesium", 3, 1, 301.7, 944, 1860, "Robert Bunsen, Gustav Kirchhoff"},
                                         {56, 137.327, "Ba", "Barium", 3, 2, 1000, 2118, 1808, "Sir Humphry Davy"},
                                         {57, 138.905, "La", "Lanthanum", 3, 3, 1193, 3737, 1839, "Carl Gustaf Mosander"},
-                                        {58, 140.116, "Ce", "Cerium", 3, 3, 1071, 3697, 1803, "Martin Heinrich Klaproth, Jöns Jakob Berzelius, Wilhelm Hisinger"},
+                                        {58, 140.116, "Ce", "Cerium", 3, 3, 1071, 3697, 1803, "Martin Heinrich Klaproth, J?ns Jakob Berzelius, Wilhelm Hisinger"},
                                         {59, 140.907, "Pr", "Praseodymium", 3, 3, 1208, 3793, 1885, "Carl Auer von Welsbach"},
                                         {60, 144.242, "Nd", "Neodymium", 3, 3, 1297, 3347, 1885, "Carl Auer von Welsbach"},
                                         {61, 145, "Pm", "Promethium", 0, 3, 1315, 3273, 1945, "Chien Shiung Wu"},
                                         {62, 150.36, "Sm", "Samarium", 3, 3, 1345, 2067, 1879, "Lecoq de Boisbaudran, F.A. Giesel"},
-                                        {63, 151.984, "Eu", "Europium", 3, 3, 1099, 1802, 1901, "Eugène-Anatole Demarçay"},
+                                        {63, 151.984, "Eu", "Europium", 3, 3, 1099, 1802, 1901, "Eug?ne-Anatole Demar?ay"},
                                         {64, 157.25, "Gd", "Gadolinium", 3, 3, 1585, 3546, 1880, "Jean Charles Galissard de Marignac"},
                                         {65, 158.925, "Tb", "Terbium", 3, 3, 1629, 3503, 1843, "Carl Gustaf Mosander"},
-                                        {66, 162.5, "Dy", "Dysprosium", 3, 3, 1680, 2840, 1886, "Paul Émile Lecoq de Boisbaudran"},
+                                        {66, 162.5, "Dy", "Dysprosium", 3, 3, 1680, 2840, 1886, "Paul ?mile Lecoq de Boisbaudran"},
                                         {67, 164.930, "Ho", "Holmium", 3, 3, 1747, 2973, 1878, "Marc Delafontaine"},
                                         {68, 167.259, "Er", "Erbium", 3, 3, 1770, 3141, 1843, "Carl Gustaf Mosander"},
                                         {69, 168.934, "Tm", "Thulium", 3, 3, 1818, 2223, 1879, "Per Teodor Cleve"},
                                         {70, 173.045, "Yb", "Ytterbium", 3, 3, 1092, 1469, 1878, "Jean Charles Galissard de Marignac"},
                                         {71, 174.966, "Lu", "Lutetium", 3, 3, 1925, 3675, 1907, "Georges Urbain, Charles James"},
-                                        {72, 178.49, "Hf", "Hafnium", 3, 4, 2506, 4876, 1923, "Dirk Coster, George de Hevesy"},
-                                        {73, 180.947, "Ta", "Tantalum", 3, 5, 3290, 5731, 1802, "Anders Gustaf Ekeberg"},
+                                        {72, 178.49, "Fr", "Hafnium", 3, 4, 2506, 4876, 1923, "Dirk Coster, George de Hevesy"},
+                                        {73, 180.947, "Ra", "Tantalum", 3, 5, 3290, 5731, 1802, "Anders Gustaf Ekeberg"},
                                         {74, 183.84, "W", "Tungsten", 3, 6, 3695, 5828, 1783, "Carl Wilhelm Scheele"},
                                         {75, 186.207, "Re", "Rhenium", 3, 7, 3459, 5869, 1925, "Walter Noddack, Ida Tacke, Otto Berg"},
                                         {76, 190.23, "Os", "Osmium", 3, 8, 3306, 5285, 1803, "Smithson Tennant"},
@@ -113,13 +113,13 @@ ChemistryElement periodicTable[NUM_ELEMENTS] = { {1, 1.008, "H", "Hydrogen", 1, 
                                         {82, 207.2, "Pb", "Lead", 3, 14, 600.61, 2022, 0, "Unknown"},
                                         {83, 208.980, "Bi", "Bismuth", 3, 15, 544.55, 1837},
                                         {84, 210, "Po", "Polonium", 3, 16, 527, 1235, 1898, "Marie Curie, Pierre Curie"},
-                                        {85, 210, "At", "Astatine", 3, 17, 575, 610, 1940, "Dale R. Corson, Emilio Segrè, Kenneth Ross MacKenzie"},
+                                        {85, 210, "At", "Astatine", 3, 17, 575, 610, 1940, "Dale R. Corson, Emilio Segr?, Kenneth Ross MacKenzie"},
                                         {86, 222, "Rn", "Radon", 3, 18, 202, 211.4, 1900, "Friedrich Ernst Dorn"},
                                         {87, 223, "Fr", "Francium", 0, 1, 300, 950, 1939, "Marguerite Perey"},
                                         {88, 226, "Ra", "Radium", 3, 2, 973, 2010, 1898, "Marie Curie, Pierre Curie"},
                                         {89, 227, "Ac", "Actinium", 3, 3, 1323, 3471, 1899, "Friedrich Oskar Giesel"},
-                                        {90, 232.038, "Th", "Thorium", 3, 4, 2115, 5061, 1828, "Jöns Jakob Berzelius"},
-                                        {91, 231.036, "Pa", "Protactinium", 3, 5, 1841, 4300, 1913, "Kasimir Fajans, Oswald Helmuth Göhring"},
+                                        {90, 232.038, "Th", "Thorium", 3, 4, 2115, 5061, 1828, "J?ns Jakob Berzelius"},
+                                        {91, 231.036, "Pa", "Protactinium", 3, 5, 1841, 4300, 1913, "Kasimir Fajans, Oswald Helmuth G?hring"},
                                         {92, 238.029, "U", "Uranium", 3, 6, 1405.3, 4404, 1789, "Martin Heinrich Klaproth"},
                                         {93, 237, "Np", "Neptunium", 3, 7, 913, 4175, 1940, "Edwin McMillan, Philip H. Abelson"},
                                         {94, 244, "Pu", "Plutonium", 3, 8, 912.5, 3505, 1940, "Glenn T. Seaborg"},
@@ -135,12 +135,12 @@ ChemistryElement periodicTable[NUM_ELEMENTS] = { {1, 1.008, "H", "Hydrogen", 1, 
                                         {104, 267, "Rf", "Rutherfordium", 3, 4, 2400, 5800, 1969, "Joint Institute for Nuclear Research (JINR)"},
                                         {105, 270, "Db", "Dubnium", 3, 5, 0, 0, 1967, "Joint Institute for Nuclear Research (JINR)"},
                                         {106, 269, "Sg", "Seaborgium", 3, 6, 0, 0, 1974, "Albert Ghiorso"},
-                                        {107, 270, "Bh", "Bohrium", 3, 7, 0, 0, 1981, "Gesellschaft für Schwerionenforschung (GSI)"},
-                                        {108, 277, "Hs", "Hassium", 3, 8, 0, 0, 1984, "Gesellschaft für Schwerionenforschung (GSI)"},
-                                        {109, 278, "Mt", "Meitnerium", 3, 9, 0, 0, 1982, "Gesellschaft für Schwerionenforschung (GSI)"},
-                                        {110, 281, "Ds", "Darmstadtium", 3, 10, 0, 0, 1994, "Gesellschaft für Schwerionenforschung (GSI)"},
-                                        {111, 282, "Rg", "Roentgenium", 3, 11, 0, 0, 1994, "Gesellschaft für Schwerionenforschung (GSI)"},
-                                        {112, 285, "Cn", "Copernicium", 3, 12, 0, 0, 1996, "Gesellschaft für Schwerionenforschung (GSI)"},
+                                        {107, 270, "Bh", "Bohrium", 3, 7, 0, 0, 1981, "Gesellschaft f?r Schwerionenforschung (GSI)"},
+                                        {108, 277, "Hs", "Hassium", 3, 8, 0, 0, 1984, "Gesellschaft f?r Schwerionenforschung (GSI)"},
+                                        {109, 278, "Mt", "Meitnerium", 3, 9, 0, 0, 1982, "Gesellschaft f?r Schwerionenforschung (GSI)"},
+                                        {110, 281, "Ds", "Darmstadtium", 3, 10, 0, 0, 1994, "Gesellschaft f?r Schwerionenforschung (GSI)"},
+                                        {111, 282, "Rg", "Roentgenium", 3, 11, 0, 0, 1994, "Gesellschaft f?r Schwerionenforschung (GSI)"},
+                                        {112, 285, "Cn", "Copernicium", 3, 12, 0, 0, 1996, "Gesellschaft f?r Schwerionenforschung (GSI)"},
                                         {113, 286, "Nh", "Nihonium", 3, 13, 0, 0, 2003, "RIKEN, JINR"},
                                         {114, 289, "Fl", "Flerovium", 3, 14, 0, 0, 1998, "Joint Institute for Nuclear Research (JINR)"},
                                         {115, 288, "Mc", "Moscovium", 3, 15, 0, 0, 2003, "RIKEN, JINR"},
@@ -188,12 +188,12 @@ int main()
         case 'C':
             vectorMenu();
             break;
-        default: 
+        default:
             cout << "\t\tERROR - Invalid input. Must be an alphabet character.\n\t";
             system("pause");
             break;
         }
-        
+
     } while (true);
 
     return EXIT_SUCCESS;
@@ -206,7 +206,7 @@ int main()
 char menuOption()
 {
     system("cls");
-    
+
     displayPeriodicTable(true);
 
     cout << "\n\tCMPR121 - Exam 1 (Chapter 12 .. 1) by Kim Hoang (9/23/2023)";
@@ -227,10 +227,10 @@ char menuOption()
 
 void displayElement(ChemistryElement element)
 {
-    cout << "\n\t" << "Atomic Number "  << "\t\t\t\t: " << element.atomicNumber;
-    cout << "\n\t" << "Symbol " << "\t\t\t\t\t: "  << element.symbol;
+    cout << "\n\t" << "Atomic Number " << "\t\t\t\t: " << element.atomicNumber;
+    cout << "\n\t" << "Symbol " << "\t\t\t\t\t: " << element.symbol;
     cout << "\n\t" << "Name " << "\t\t\t\t\t: " << element.name;
-    cout << "\n\t" << "Atomic Mass " << "\t\t\t\t: "  << element.atomicMass << " u";
+    cout << "\n\t" << "Atomic Mass " << "\t\t\t\t: " << element.atomicMass << " u";
     if (element.chemicalGroupBlock > -1 && element.chemicalGroupBlock < 11)
     {
         cout << "\n\t" << "Chemical Group Block " << "\t\t\t: " << ChemicalGroupBlock[element.chemicalGroupBlock];
@@ -240,9 +240,9 @@ void displayElement(ChemistryElement element)
         cout << "\n\t" << "Standard State " << "\t\t\t\t: " << StandardState[element.standardState];
     }
     cout << "\n\t" << "Melting point " << "\t\t\t\t: " << element.meltingPoint - 273.15 << "\370" << "C (" << element.meltingPoint << " K)";
-    cout << "\n\t" << "Boiling point " << "\t\t\t\t: " << element.boilingPoint - 273.15 <<  "\370" << "C (" << element.meltingPoint << " K)";
+    cout << "\n\t" << "Boiling point " << "\t\t\t\t: " << element.boilingPoint - 273.15 << "\370" << "C (" << element.meltingPoint << " K)";
     cout << "\n\t" << "Year discovered " << "\t\t\t: " << element.yearDiscovered;
-    cout << "\n\t" << "Discoverer " << "\t\t\t\t: "  << element.Discoverer;
+    cout << "\n\t" << "Discoverer " << "\t\t\t\t: " << element.Discoverer;
 }
 
 // Function: displayElementsFromBinaryFile()
@@ -304,10 +304,10 @@ void editAtomicNumber(ChemistryElement& element)
 // Precondition: User must enter a valid symbol
 // Postcondition: Edits the symbol of the element
 
-void editSymbol(ChemistryElement & element)
+void editSymbol(ChemistryElement& element)
 {
     string symbol = inputString("\n Enter Symbol: ", false);
-    while (symbol.length()  == 0 || symbol.length() > 2)
+    while (symbol.length() == 0 || symbol.length() > 2)
     {
         symbol = inputString("\nSymbol cannot be longer than 2 characters.  Enter Symbol: ", false);
     }
@@ -328,7 +328,7 @@ void editAtomicMass(ChemistryElement& element)
 // Precondition: User must enter a valid name
 // Postcondition: Edits the name of the element
 
-void editName(ChemistryElement & element)
+void editName(ChemistryElement& element)
 {
     string nameStr = inputString("\n\tEnter Name: ", false);
 
@@ -345,8 +345,8 @@ void editName(ChemistryElement & element)
 
 void editChemicalGroupBlock(ChemistryElement& element)
 {
-	int chemicalGroupBlock = inputInteger("\n\t Enter the Chemical Group Block (0 - unknown, 1 - Nonmetal, 2 - Nobel Gas, 3 - Alkali Metal, 4 - Alkaline Earth Metal, 5 - Post-transition Metal, 6 - Metalloid, 7 - Halogen, 8 - Nonmetal, 9 - Lanthanide, or 10 - Actinide) : ", 0, 10);
-	element.chemicalGroupBlock = chemicalGroupBlock;
+    int chemicalGroupBlock = inputInteger("\n\t Enter the Chemical Group Block (0 - unknown, 1 - Nonmetal, 2 - Nobel Gas, 3 - Alkali Metal, 4 - Alkaline Earth Metal, 5 - Post-transition Metal, 6 - Metalloid, 7 - Halogen, 8 - Nonmetal, 9 - Lanthanide, or 10 - Actinide) : ", 0, 10);
+    element.chemicalGroupBlock = chemicalGroupBlock;
 }
 
 // Function: editStandardState(ChemistryElement& element)
@@ -355,8 +355,8 @@ void editChemicalGroupBlock(ChemistryElement& element)
 
 void editStandardState(ChemistryElement& element)
 {
-	int standardState = inputInteger("\n\t Enter the Standard State (0 - unknown, 1 - Gas, 2 - Liquid, or 3 - Solid) : ", 0, 3);
-	element.standardState = standardState;
+    int standardState = inputInteger("\n\t Enter the Standard State (0 - unknown, 1 - Gas, 2 - Liquid, or 3 - Solid) : ", 0, 3);
+    element.standardState = standardState;
 }
 
 // Function: editMeltingPoint(ChemistryElement& element)
@@ -365,8 +365,8 @@ void editStandardState(ChemistryElement& element)
 
 void editMeltingPoint(ChemistryElement& element)
 {
-	double meltingPoint = inputDouble("\n\t Enter the Melting Point (K): ");
-	element.meltingPoint = meltingPoint;
+    double meltingPoint = inputDouble("\n\t Enter the Melting Point (K): ");
+    element.meltingPoint = meltingPoint;
 }
 
 // Function: editBoilingPoint(ChemistryElement& element)
@@ -375,8 +375,8 @@ void editMeltingPoint(ChemistryElement& element)
 
 void editBoilingPoint(ChemistryElement& element)
 {
-	double boilingPoint = inputDouble("\n\t Enter the Boiling Point (K): ");
-	element.boilingPoint = boilingPoint;
+    double boilingPoint = inputDouble("\n\t Enter the Boiling Point (K): ");
+    element.boilingPoint = boilingPoint;
 }
 
 // Function: editYearDiscovered(ChemistryElement& element)
@@ -385,8 +385,8 @@ void editBoilingPoint(ChemistryElement& element)
 
 void editYearDiscovered(ChemistryElement& element)
 {
-	int yearDiscovered = inputInteger("\n\t Enter Year Discovered: ", 0, 3000);
-	element.yearDiscovered = yearDiscovered;
+    int yearDiscovered = inputInteger("\n\t Enter Year Discovered: ", 0, 3000);
+    element.yearDiscovered = yearDiscovered;
 }
 
 // Function: editDiscoverer(ChemistryElement& element)
@@ -395,11 +395,11 @@ void editYearDiscovered(ChemistryElement& element)
 
 void editDiscoverer(ChemistryElement& element)
 {
-	string discovererStr = inputString("\n\tEnter the Discoverer(s): ", false);	
+    string discovererStr = inputString("\n\tEnter the Discoverer(s): ", false);
     while (discovererStr.length() > 100)
     {
         discovererStr = inputString("\n\tDiscoverer(s) cannot be longger than 100 characters.  Ennter the Discoverer(s)", false);
-	}
+    }
     strcpy_s(element.Discoverer, discovererStr.length() + 1, discovererStr.c_str());
 
 }
@@ -408,22 +408,32 @@ void editDiscoverer(ChemistryElement& element)
 // Precondition: User must enter a valid file name
 // Postcondition: Writes the element to the file
 
-void writeElementToFile(string fileName, ChemistryElement updatedElement, int elementPosition)
+void writeElementToFile(string fileName, ChemistryElement updatedElement, int elementPosition, bool showResults)
 {
-    
-    fstream s(fileName, ios_base::binary | ios_base::in | ios_base::out);
-    if (s.good())
+
+    //fstream s(fileName, ios_base::binary | ios_base::in | ios_base::out);
+    ofstream outFile;
+    outFile.open(fileName, ios_base::binary | ios_base::in | ios_base::out);
+
+    if (!outFile.good())
     {
-        s.seekp(elementPosition * sizeof(ChemistryElement), ios_base::beg);
-        s.write((char*)&updatedElement, sizeof(ChemistryElement));
-        s.close();
-        cout << "\n\tElement has been successfully updated";
+        outFile.open(fileName, ios_base::binary | ios_base::out);
+    }
+
+    if (outFile.good())
+    {
+        outFile.seekp(elementPosition * sizeof(ChemistryElement), ios_base::beg);
+        outFile.write((char*)&updatedElement, sizeof(ChemistryElement));
+        outFile.close();
+        if (showResults)
+            cout << "\n\tElement has been successfully updated";
     }
     else
     {
-        cout << "\n\tElement could not be updated because " << fileName << " could not be opened \n";
+        if (showResults)
+            cout << "\n\tElement could not be updated because " << fileName << " could not be opened \n";
     }
-    
+
 }
 
 // Function: editElementPropertiesMenu(ChemistryElement element, int elementPosition, bool& saveUpdates)
@@ -436,22 +446,22 @@ ChemistryElement editElementPropertiesMenu(ChemistryElement element, int element
     while ((option == -2))
     {
         cout << "\n";
-         cout << "\n\t Edit Element Properties Menu";
-         cout << "\n\t" << string(90, char(205));
-         cout << "\n\t 1. Atomic Number";
-         cout << "\n\t 2. Symbol";
-         cout << "\n\t 3. Name";
-         cout << "\n\t 4. Atomic Mass";
-         cout << "\n\t 5. Chemical Group Block";
-         cout << "\n\t 6. Standard State";
-         cout << "\n\t 7. Melting point";
-         cout << "\n\t 8. Boiling point";
-         cout << "\n\t 9. Discovered year";
-         cout << "\n\t 10. Discovered By";
-         cout << "\n\t" << string(90, char(196));
-         cout << "\n\t-1. return without committing the updates";
-         cout << "\n\t 0. Committing the updates and return";
-         cout << "\n\t" << string(90, char(205));
+        cout << "\n\t Edit Element Properties Menu";
+        cout << "\n\t" << string(90, char(205));
+        cout << "\n\t 1. Atomic Number";
+        cout << "\n\t 2. Symbol";
+        cout << "\n\t 3. Name";
+        cout << "\n\t 4. Atomic Mass";
+        cout << "\n\t 5. Chemical Group Block";
+        cout << "\n\t 6. Standard State";
+        cout << "\n\t 7. Melting point";
+        cout << "\n\t 8. Boiling point";
+        cout << "\n\t 9. Discovered year";
+        cout << "\n\t 10. Discovered By";
+        cout << "\n\t" << string(90, char(196));
+        cout << "\n\t-1. return without committing the updates";
+        cout << "\n\t 0. Committing the updates and return";
+        cout << "\n\t" << string(90, char(205));
         option = inputInteger("\n\tOption: ", -1, 10);
         while (option < -1 || option > 10)
         {
@@ -504,11 +514,11 @@ ChemistryElement editElementPropertiesMenu(ChemistryElement element, int element
 
         case 0:
             saveUpdates = true;
-            
+
             break;
 
         case -1:
-             cout << "\nElement has NOT been updated.";
+            cout << "\nElement has NOT been updated.";
             break;
 
         default:
@@ -528,16 +538,16 @@ void searchAndUpdateAnElement(string fileName)
 {
     if (fileName.empty())
     {
-         cout << "\n\tERROR: no binary file has been specified from step #1.\n";
-      
+        cout << "\n\tERROR: no binary file has been specified from step #1.\n";
+
         return;
     }
 
-    string symbol = inputString("\n\tEnter an Element Symbol to search and update: ", false);   
-   
+    string symbol = inputString("\n\tEnter an Element Symbol to search and update: ", false);
+
     int elementIndex = -1;
-    
-    fstream readBinary(fileName, ios::binary | ios::in );
+
+    fstream readBinary(fileName, ios::binary | ios::in);
     if (readBinary.good())
     {
         bool found = false;
@@ -545,14 +555,14 @@ void searchAndUpdateAnElement(string fileName)
         ChemistryElement elements[NUM_ELEMENTS];
         streampos length = readBinary.tellg();
         size_t numOfElements = length / sizeof(ChemistryElement);
-       
+
         bool saveUpdate = false;
         for (int i = 0; i < numOfElements; i++)
         {
             ChemistryElement element;
             readBinary.seekp(i * sizeof(ChemistryElement));
             readBinary.read((char*)&element, sizeof(ChemistryElement));
-            
+
             if (element.symbol == symbol)
             {
                 cout << "\n\t" << string(90, char(196));
@@ -561,7 +571,7 @@ void searchAndUpdateAnElement(string fileName)
                 ChemistryElement updated = editElementPropertiesMenu(element, i, saveUpdate);
                 if (saveUpdate)
                 {
-                    writeElementToFile(fileName, updated, i);
+                    writeElementToFile(fileName, updated, i, true);
                 }
                 found = true;
                 break;
@@ -572,20 +582,20 @@ void searchAndUpdateAnElement(string fileName)
         {
             cout << "\n\tERROR: Element cannot be found from binary file.";
         }
-    }  
+    }
     else
     {
         cout << "\n\tERROR: binary data file, " << fileName << ", cannot be found.";
     }
 
-    
+
 }
 
 // Function: searchAndUpdateAnElement()
 // Precondition: User must enter a valid option
 // Postcondition: Searches and updates the element
 
-void searchAndUpdateAnElement(ChemistryElement * elements, int numOfElements, bool clearScreen, bool bySymbol)
+void searchAndUpdateAnElement(ChemistryElement* elements, int numOfElements, bool clearScreen, bool bySymbol)
 {
     if (clearScreen)
     {
@@ -593,9 +603,9 @@ void searchAndUpdateAnElement(ChemistryElement * elements, int numOfElements, bo
     }
     if (numOfElements == 0)
     {
-         cout << "\n\tBinary file has not been loaded into the array.  Please perform step #1 first";
-         cout << "\n\t";
-        
+        cout << "\n\tBinary file has not been loaded into the array.  Please perform step #1 first";
+        cout << "\n\t";
+
         return;
     }
     string prompt = "Symbol";
@@ -623,8 +633,8 @@ void searchAndUpdateAnElement(ChemistryElement * elements, int numOfElements, bo
             return;
         }
     }
-    
-    cout << "\n\tERROR: Element with " << prompt  << ", " << search << ", cannot be found. \n ";
+
+    cout << "\n\tERROR: Element with " << prompt << ", " << search << ", cannot be found. \n ";
     system("pause");
 
 }
@@ -645,7 +655,7 @@ void searchAndUpdateAnElementByAtomicNumber(ChemistryElement* elements, int numO
         cout << "\n Binary file has not been loaded into the array.  Please perform step #1 first.\n" << "\n";
         system("pause");
     }
-    
+
     int atomic = inputInteger("\n\tEnter an Atomic Number (1.." + to_string(numOfElements) + ")  to search and update: ", 1, numOfElements);
     int elementIndex = -1;
 
@@ -667,15 +677,15 @@ void searchAndUpdateAnElementByAtomicNumber(ChemistryElement* elements, int numO
             else
             {
                 cout << "\n";
-				system("pause");
-				return;
+                system("pause");
+                return;
             }
             break;
         }
     }
 
- /*   cout << "\n\tERROR: Element with Atomic Number, " << atomic << ", cannot be found. \n ";
-    system("pause");*/
+    /*   cout << "\n\tERROR: Element with Atomic Number, " << atomic << ", cannot be found. \n ";
+       system("pause");*/
 
 }
 
@@ -718,7 +728,7 @@ int advanceBinaryFileOperationMenu()
             system("pause");
             break;
         }
-        
+
     } while (selection != 0);
 
     return 1;// inputInteger("\n\tOption: ", 0, 2);
@@ -728,7 +738,7 @@ int advanceBinaryFileOperationMenu()
 // Precondition: User must enter a valid option
 // Postcondition: Sorts the elements by atomic number
 
-void selectionSort(int atomics[], ChemistryElement elements[],  int n)
+void selectionSort(int atomics[], ChemistryElement elements[], int n)
 {
     int i, j, min_idx;
 
@@ -740,7 +750,7 @@ void selectionSort(int atomics[], ChemistryElement elements[],  int n)
         // unsorted array
         min_idx = i;
         for (j = i + 1; j < n; j++) {
-            if (atomics[j] < atomics [min_idx])
+            if (atomics[j] < atomics[min_idx])
                 min_idx = j;
         }
 
@@ -759,15 +769,15 @@ void selectionSort(int atomics[], ChemistryElement elements[],  int n)
 // Precondition: User must enter a valid option
 // Postcondition: Reads and stores the binary file to sorted array
 
-void readStoreBinaryFileToSortedArray(ChemistryElement *& elements, int & numOfElements)
+void readStoreBinaryFileToSortedArray(ChemistryElement*& elements, int& numOfElements)
 {
     string fileName = inputString("\n\tEnter the binary data file name: ", false);
-    
+
     int atomics[NUM_ELEMENTS];
 
     ifstream unsortedFile(fileName, ios::binary | ios::in);
     numOfElements = 0;
-    
+
     if (unsortedFile.good())
     {
         unsortedFile.seekg(0, unsortedFile.end);
@@ -785,7 +795,7 @@ void readStoreBinaryFileToSortedArray(ChemistryElement *& elements, int & numOfE
     {
         cout << "\n\tERROR: binary data file, " << fileName << ", could be not found\n";
     }
-    
+
     system("pause");
 }
 
@@ -793,11 +803,11 @@ void readStoreBinaryFileToSortedArray(ChemistryElement *& elements, int & numOfE
 // Precondition: User must enter a valid option
 // Postcondition: Reads and stores the binary file to vector
 
-void readStoreBinaryFileToVector(vector<ChemistryElement> & elements)
+void readStoreBinaryFileToVector(vector<ChemistryElement>& elements)
 {
     string fileName = inputString("\n\tEnter the binary data file name: ", false);
     ifstream unsortedFile(fileName, ios::binary | ios::in);
-    
+
     size_t numOfElements = 0;
     if (unsortedFile.good())
     {
@@ -816,7 +826,7 @@ void readStoreBinaryFileToVector(vector<ChemistryElement> & elements)
     }
     cout << "\n\t";
     system("pause");
-    
+
 }
 
 // Function: writeArrayToBinaryFile(ChemistryElement* elements, int numOfElement)
@@ -828,16 +838,21 @@ void writeArrayToBinaryFile(ChemistryElement* elements, int numOfElement)
     if (elements != NULL)
     {
         string fileName = inputString("\nEnter the binary file name to write to: ", false);
-        ofstream outFile;
+        for (int i = 0; i < numOfElement; i++)
+        {
+            writeElementToFile(fileName, elements[i], i, false);
+        }
+        /*ofstream outFile;
         outFile.open(fileName, ios::out);
         while (!outFile.is_open())
         {
             fileName = inputString("\nEnter the binary file name to write to:", false);
-            
+
         }
         outFile.write((char*)elements, sizeof(ChemistryElement) * numOfElement);
+
+        outFile.close();*/
         cout << "\n\t SUCCESS: " << numOfElement << " (struct) from array have been written to the binary data file, " << fileName << ".\n";
-        outFile.close();
         system("pause");
     }
     else
@@ -855,7 +870,7 @@ int dynamicAllocatedArrayMenu()
     int selection = -1;
     ChemistryElement* elements = NULL;
     int count = 0;
-    do 
+    do
     {
         system("cls");
         displayPeriodicTable(false);
@@ -869,7 +884,7 @@ int dynamicAllocatedArrayMenu()
         cout << "\n\t0. Return to main menu";
         cout << "\n\t" << string(90, char(205));
         selection = inputInteger("\n\tOption: ", 0, 4);
-        
+
 
         while (selection < 0 || selection > 4)
         {
@@ -901,10 +916,10 @@ int dynamicAllocatedArrayMenu()
         case 3:
             if (elements == NULL)
             {
-				cout << "\n Binary file has not been loaded into the array.  Please perform step 1 first.\n" << "\n";
+                cout << "\n Binary file has not been loaded into the array.  Please perform step 1 first.\n" << "\n";
                 system("pause");
-				break;
-			}
+                break;
+            }
             searchAndUpdateAnElementByAtomicNumber(elements, count, false);
 
             break;
@@ -926,9 +941,9 @@ int dynamicAllocatedArrayMenu()
             system("pause");
             break;
         }
-        
+
     } while (selection != 0);
-    
+
     return 1;
 }
 
@@ -940,12 +955,12 @@ int vectorMenu()
 {
     int selection = -1;
     vector<ChemistryElement> elements;
-    
+
     do
     {
         system("cls");
         displayPeriodicTable(true);
-        
+
         cout << "\n\tVector (array) Menu";
         cout << "\n\t" << string(60, char(205));
         cout << "\n\t1. Read, store ALL elements from binary file into the unsorted vector";
@@ -988,7 +1003,7 @@ int vectorMenu()
             break;
         case 3:
             searchAndUpdateAnElement(elements.data(), elements.size(), false, false);
-            
+
             break;
         case 4:
             writeArrayToBinaryFile(elements.data(), elements.size());
@@ -997,7 +1012,7 @@ int vectorMenu()
             break;
 
         case 0:
-            
+
             break;
         }
 
@@ -1028,13 +1043,16 @@ void drawEmptyElements(int numEle, bool bySymbol)
 
 void drawElements(int startingAtomicNum, int howManyEle, bool bySymbol)
 {
-    
+
     for (int i = 0; i < howManyEle; i++)
     {
         int index = startingAtomicNum + i - 1;
         string atomicNumberStr = "";
         switch (periodicTable[index].chemicalGroupBlock)
         {
+        case 0:
+            cout << "\033[1;30m";
+            break;
         case 1:
             cout << "\033[1;31m";
             break;
@@ -1059,10 +1077,23 @@ void drawElements(int startingAtomicNum, int howManyEle, bool bySymbol)
         case 8:
             cout << "\033[1;38m";
             break;
+        case 9:
+            cout << "\033[1;39m";
+            break;
+        case 10:
+            cout << "\033[1;40m";
+            break;
         }
         if (bySymbol)
         {
-            cout << "[ " << periodicTable[index].symbol << "]";
+            if (strlen(periodicTable[index].symbol) == 1)
+            {
+                cout << "[  " << periodicTable[index].symbol << "]";
+            }
+            else
+            {
+                cout << "[ " << periodicTable[index].symbol << "]";
+            }
         }
         else
         {
@@ -1078,9 +1109,9 @@ void drawElements(int startingAtomicNum, int howManyEle, bool bySymbol)
             {
                 atomicNumberStr = "" + to_string(periodicTable[index].atomicNumber);
             }
-            cout << "[" << atomicNumberStr  << "]";
+            cout << "[" << atomicNumberStr << "]";
         }
-        
+
     }
 }
 
@@ -1103,7 +1134,7 @@ void displayPeriodicTable(bool bySymbol)
     {
         cout << "\t";
         if (row == 0)
-        { 
+        {
             drawElements(periodicTable[currentAtomic].atomicNumber, 1, bySymbol);
             currentAtomic++;
             drawEmptyElements(16, bySymbol);
@@ -1135,7 +1166,7 @@ void displayPeriodicTable(bool bySymbol)
                 cout << "  *  ";
                 drawElements(72, 15, bySymbol);
                 currentAtomic += 15;
-               
+
             }
             else
             {
@@ -1144,7 +1175,7 @@ void displayPeriodicTable(bool bySymbol)
                 currentAtomic += 15;
             }
             cout << "\n";
-            
+
         }
         else if (row == 7)
         {
@@ -1154,17 +1185,17 @@ void displayPeriodicTable(bool bySymbol)
         {
             drawEmptyElements(2, bySymbol);
             cout << "  *  ";
-            cout << "\033[1;34m";
+            //cout << "\033[1;34m";
             drawElements(57, 15, bySymbol);
-            cout << "\033[0m\n";
+            cout << "\n";
         }
         else if (row == 9)
         {
             drawEmptyElements(2, bySymbol);
             cout << "  ** ";
-            cout << "\033[1;30m";
+            //cout << "\033[1;30m";
             drawElements(89, 15, bySymbol);
-            cout << "\033[0m\n";
+            cout << "\n";
         }
 
     }
@@ -1221,10 +1252,10 @@ bool validateNumericString(char inputStr[maxSize], int numberOfDigits, bool chec
 }
 
 
-/*  This function check to make sure the input length is between the min and the max.  
+/*  This function check to make sure the input length is between the min and the max.
 * It also checks to make sure the input is not a blank line
 */
-bool validateString(char input [100], int minLen, int maxLen)
+bool validateString(char input[100], int minLen, int maxLen)
 {
     int numOfSpaces = 0;
     if (strlen(input) < minLen || strlen(input) > maxLen)
