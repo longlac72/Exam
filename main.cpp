@@ -422,11 +422,10 @@ void writeElementToFile(string fileName, ChemistryElement updatedElement, int el
 
     if (outFile.good())
     {
-        outFile.seekp(elementPosition * sizeof(ChemistryElement), ios_base::beg);
-        outFile.write((char*)&updatedElement, sizeof(ChemistryElement));
-        outFile.close();
-        if (showResults)
-            cout << "\n\tElement has been successfully updated";
+        s.seekp(elementPosition * sizeof(ChemistryElement), ios_base::beg);
+        s.write((char*)&updatedElement, sizeof(ChemistryElement));
+        s.close();
+        cout << "\n\tElement has been successfully updated";
     }
     else
     {
@@ -850,8 +849,6 @@ void writeArrayToBinaryFile(ChemistryElement* elements, int numOfElement)
 
         }
         outFile.write((char*)elements, sizeof(ChemistryElement) * numOfElement);
-
-        outFile.close();*/
         cout << "\n\t SUCCESS: " << numOfElement << " (struct) from array have been written to the binary data file, " << fileName << ".\n";
         system("pause");
     }
@@ -1086,14 +1083,7 @@ void drawElements(int startingAtomicNum, int howManyEle, bool bySymbol)
         }
         if (bySymbol)
         {
-            if (strlen(periodicTable[index].symbol) == 1)
-            {
-                cout << "[  " << periodicTable[index].symbol << "]";
-            }
-            else
-            {
-                cout << "[ " << periodicTable[index].symbol << "]";
-            }
+            cout << "[ " << periodicTable[index].symbol << "]";
         }
         else
         {
