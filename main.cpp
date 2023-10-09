@@ -14,7 +14,7 @@ const int maxSize = 100;
 const int NUM_ELEMENTS = 118;
 
 string ChemicalGroupBlock[11] = { "unknown", "Nonmetal", "Noble Gas", "Alkali Metal", "Alkaline Earth Metal", "Post-transition Metal", "Metalloid", "Halogen", "Nonmetal", "Lanthanide", "Actinide" };
-string StandardState[4] = { "unknown", "Gas", "Liquid", "Solia" };
+string StandardState[4] = { "unknown", "Gas", "Liquid", "Solid" };
 
 struct ChemistryElement
 {
@@ -41,8 +41,8 @@ ChemistryElement periodicTable[NUM_ELEMENTS] = { {1, 1.008, "H", "Hydrogen", 1, 
                                         {10, 20.180, "Ne", "Neon", 1, 18, -248.59, -246.04, 1898, "William Ramsay"},
                                         {11, 22.990, "Na", "Sodium", 3, 1, 97.72, 883, 1807, "Sir Humphry Davy"},
                                         {12, 24.305, "Mg", "Magnesium", 3, 2, 650.6, 1363, 1828, "Joseph Louis Gay-Lussac"},
-                                        {13, 26.982, "Al", "Aluminum", 3, 13, 660.37, 2792, 1825, "Friedrich W?hler"},
-                                        {14, 28.086, "Si", "Silicon", 3, 14, 1414, 3538, 1823, "J?ns Jakob Berzelius"},
+                                        {13, 26.982, "Al", "Aluminum", 3, 13, 660.37, 2792, 1825, "Friedrich Wöhler"},
+                                        {14, 28.086, "Si", "Silicon", 3, 14, 1414, 3538, 1823, "Jöns Jakob Berzelius"},
                                         {15, 30.974, "P", "Phosphorus", 3, 15, 44.2, 553.7, 1660, "Hennig Brand"},
                                         {16, 32.065, "S", "Sulfur", 3, 16, 119.2, 717.8, 0, "Unknown"},
                                         {17, 35.453, "Cl", "Chlorine", 1, 17, -101.5, -34.04, 1774, "Carl Wilhelm Scheele"},
@@ -51,7 +51,7 @@ ChemistryElement periodicTable[NUM_ELEMENTS] = { {1, 1.008, "H", "Hydrogen", 1, 
                                         {20, 40.078, "Ca", "Calcium", 3, 2, 1115, 1757, 1808, "Sir Humphry Davy"},
                                         {21, 44.956, "Sc", "Scandium", 3, 3, 1814, 3345, 1879, "Lars Fredrik Nilson"},
                                         {22, 47.867, "Ti", "Titanium", 3, 4, 1941, 3560, 1791, "William Gregor"},
-                                        {23, 50.942, "V", "Vanadium", 3, 5, 2183, 3407, 1801, "Andr?s Manuel del R?o"},
+                                        {23, 50.942, "V", "Vanadium", 3, 5, 2183, 3407, 1801, "Andrés Manuel del Río"},
                                         {24, 51.996, "Cr", "Chromium", 3, 6, 2180, 3076, 1797, "Louis Nicolas Vauquelin"},
                                         {25, 54.938, "Mn", "Manganese", 3, 7, 1519, 2334, 1774, "Johan Gottlieb Gahn"},
                                         {26, 55.845, "Fe", "Iron", 3, 8, 1811, 3134, 0, "Meteorites"},
@@ -59,11 +59,11 @@ ChemistryElement periodicTable[NUM_ELEMENTS] = { {1, 1.008, "H", "Hydrogen", 1, 
                                         {28, 58.693, "Ni", "Nickel", 3, 10, 1768, 3003, 1751, "Axel Fredrik Cronstedt"},
                                         {29, 63.546, "Cu", "Copper", 3, 11, 1357, 2835, 0, "Unknown"},
                                         {30, 65.409, "Zn", "Zinc", 3, 12, 692.68, 907, 0, "Unknown"},
-                                        {31, 69.723, "Ga", "Gallium", 3, 13, 302.9, 2403, 1875, "Paul ?mile Lecoq de Boisbaudran"},
+                                        {31, 69.723, "Ga", "Gallium", 3, 13, 302.9, 2403, 1875, "Paul Émile Lecoq de Boisbaudran"},
                                         {32, 72.640, "Ge", "Germanium", 3, 14, 1211.4, 3106, 1886, "Clemens Winkler"},
                                         {33, 74.922, "As", "Arsenic", 3, 15, 1090, 887, 0, "Unknown"},
                                         {34, 78.971, "Se", "Selenium", 3, 16, 221.1, 494.5, 0, "Unknown"},
-                                        {35, 79.904, "Br", "Bromine", 2, 17, -7.22, 59.5, 1826, "Carl Jacob L?wig"},
+                                        {35, 79.904, "Br", "Bromine", 2, 17, -7.22, 59.5, 1826, "Carl Jacob Löwig"},
                                         {36, 83.798, "Kr", "Krypton", 1, 18, -157.4, -153.4, 1898, "Sir William Ramsay"},
                                         {37, 85.467, "Rb", "Rubidium", 3, 1, 39.3, 961, 1861, "Robert Bunsen"},
                                         {38, 87.62, "Sr", "Strontium", 3, 2, 1050, 1384, 1790, "Adair Crawford"},
@@ -80,21 +80,21 @@ ChemistryElement periodicTable[NUM_ELEMENTS] = { {1, 1.008, "H", "Hydrogen", 1, 
                                         {49, 114.818, "In", "Indium", 3, 13, 429.8, 2345, 1863, "Ferdinand Reich"},
                                         {50, 118.71, "Sn", "Tin", 3, 14, 505.08, 2875, 0, "Unknown"},
                                         {51, 121.76, "Sb", "Antimony", 3, 15, 903, 1807,},
-                                        {52, 127.6, "Te", "Tellurium", 3, 16, 722.66, 1307, 1782, "Franz-Joseph M?ller von Reichenstein"},
+                                        {52, 127.6, "Te", "Tellurium", 3, 16, 722.66, 1307, 1782, "Franz-Joseph Müller von Reichenstein"},
                                         {53, 126.905, "I", "Iodine", 3, 17, 114.7, 461, 1811, "Bernard Courtois"},
                                         {54, 131.293, "Xe", "Xenon", 1, 18, -111.9, -108.1, 1898, "Morris Travers"},
                                        {55, 132.905, "Cs", "Cesium", 3, 1, 301.7, 944, 1860, "Robert Bunsen, Gustav Kirchhoff"},
                                         {56, 137.327, "Ba", "Barium", 3, 2, 1000, 2118, 1808, "Sir Humphry Davy"},
                                         {57, 138.905, "La", "Lanthanum", 3, 3, 1193, 3737, 1839, "Carl Gustaf Mosander"},
-                                        {58, 140.116, "Ce", "Cerium", 3, 3, 1071, 3697, 1803, "Martin Heinrich Klaproth, J?ns Jakob Berzelius, Wilhelm Hisinger"},
+                                        {58, 140.116, "Ce", "Cerium", 3, 3, 1071, 3697, 1803, "Martin Heinrich Klaproth, Jöns Jakob Berzelius, Wilhelm Hisinger"},
                                         {59, 140.907, "Pr", "Praseodymium", 3, 3, 1208, 3793, 1885, "Carl Auer von Welsbach"},
                                         {60, 144.242, "Nd", "Neodymium", 3, 3, 1297, 3347, 1885, "Carl Auer von Welsbach"},
                                         {61, 145, "Pm", "Promethium", 0, 3, 1315, 3273, 1945, "Chien Shiung Wu"},
                                         {62, 150.36, "Sm", "Samarium", 3, 3, 1345, 2067, 1879, "Lecoq de Boisbaudran, F.A. Giesel"},
-                                        {63, 151.984, "Eu", "Europium", 3, 3, 1099, 1802, 1901, "Eug?ne-Anatole Demar?ay"},
+                                        {63, 151.984, "Eu", "Europium", 3, 3, 1099, 1802, 1901, "Eugène-Anatole Demarçay"},
                                         {64, 157.25, "Gd", "Gadolinium", 3, 3, 1585, 3546, 1880, "Jean Charles Galissard de Marignac"},
                                         {65, 158.925, "Tb", "Terbium", 3, 3, 1629, 3503, 1843, "Carl Gustaf Mosander"},
-                                        {66, 162.5, "Dy", "Dysprosium", 3, 3, 1680, 2840, 1886, "Paul ?mile Lecoq de Boisbaudran"},
+                                        {66, 162.5, "Dy", "Dysprosium", 3, 3, 1680, 2840, 1886, "Paul Émile Lecoq de Boisbaudran"},
                                         {67, 164.930, "Ho", "Holmium", 3, 3, 1747, 2973, 1878, "Marc Delafontaine"},
                                         {68, 167.259, "Er", "Erbium", 3, 3, 1770, 3141, 1843, "Carl Gustaf Mosander"},
                                         {69, 168.934, "Tm", "Thulium", 3, 3, 1818, 2223, 1879, "Per Teodor Cleve"},
@@ -113,13 +113,13 @@ ChemistryElement periodicTable[NUM_ELEMENTS] = { {1, 1.008, "H", "Hydrogen", 1, 
                                         {82, 207.2, "Pb", "Lead", 3, 14, 600.61, 2022, 0, "Unknown"},
                                         {83, 208.980, "Bi", "Bismuth", 3, 15, 544.55, 1837},
                                         {84, 210, "Po", "Polonium", 3, 16, 527, 1235, 1898, "Marie Curie, Pierre Curie"},
-                                        {85, 210, "At", "Astatine", 3, 17, 575, 610, 1940, "Dale R. Corson, Emilio Segr?, Kenneth Ross MacKenzie"},
+                                        {85, 210, "At", "Astatine", 3, 17, 575, 610, 1940, "Dale R. Corson, Emilio Segrè, Kenneth Ross MacKenzie"},
                                         {86, 222, "Rn", "Radon", 3, 18, 202, 211.4, 1900, "Friedrich Ernst Dorn"},
                                         {87, 223, "Fr", "Francium", 0, 1, 300, 950, 1939, "Marguerite Perey"},
                                         {88, 226, "Ra", "Radium", 3, 2, 973, 2010, 1898, "Marie Curie, Pierre Curie"},
                                         {89, 227, "Ac", "Actinium", 3, 3, 1323, 3471, 1899, "Friedrich Oskar Giesel"},
-                                        {90, 232.038, "Th", "Thorium", 3, 4, 2115, 5061, 1828, "J?ns Jakob Berzelius"},
-                                        {91, 231.036, "Pa", "Protactinium", 3, 5, 1841, 4300, 1913, "Kasimir Fajans, Oswald Helmuth G?hring"},
+                                        {90, 232.038, "Th", "Thorium", 3, 4, 2115, 5061, 1828, "Jöns Jakob Berzelius"},
+                                        {91, 231.036, "Pa", "Protactinium", 3, 5, 1841, 4300, 1913, "Kasimir Fajans, Oswald Helmuth Göhring"},
                                         {92, 238.029, "U", "Uranium", 3, 6, 1405.3, 4404, 1789, "Martin Heinrich Klaproth"},
                                         {93, 237, "Np", "Neptunium", 3, 7, 913, 4175, 1940, "Edwin McMillan, Philip H. Abelson"},
                                         {94, 244, "Pu", "Plutonium", 3, 8, 912.5, 3505, 1940, "Glenn T. Seaborg"},
@@ -135,12 +135,12 @@ ChemistryElement periodicTable[NUM_ELEMENTS] = { {1, 1.008, "H", "Hydrogen", 1, 
                                         {104, 267, "Rf", "Rutherfordium", 3, 4, 2400, 5800, 1969, "Joint Institute for Nuclear Research (JINR)"},
                                         {105, 270, "Db", "Dubnium", 3, 5, 0, 0, 1967, "Joint Institute for Nuclear Research (JINR)"},
                                         {106, 269, "Sg", "Seaborgium", 3, 6, 0, 0, 1974, "Albert Ghiorso"},
-                                        {107, 270, "Bh", "Bohrium", 3, 7, 0, 0, 1981, "Gesellschaft f?r Schwerionenforschung (GSI)"},
-                                        {108, 277, "Hs", "Hassium", 3, 8, 0, 0, 1984, "Gesellschaft f?r Schwerionenforschung (GSI)"},
-                                        {109, 278, "Mt", "Meitnerium", 3, 9, 0, 0, 1982, "Gesellschaft f?r Schwerionenforschung (GSI)"},
-                                        {110, 281, "Ds", "Darmstadtium", 3, 10, 0, 0, 1994, "Gesellschaft f?r Schwerionenforschung (GSI)"},
-                                        {111, 282, "Rg", "Roentgenium", 3, 11, 0, 0, 1994, "Gesellschaft f?r Schwerionenforschung (GSI)"},
-                                        {112, 285, "Cn", "Copernicium", 3, 12, 0, 0, 1996, "Gesellschaft f?r Schwerionenforschung (GSI)"},
+                                        {107, 270, "Bh", "Bohrium", 3, 7, 0, 0, 1981, "Gesellschaft für Schwerionenforschung (GSI)"},
+                                        {108, 277, "Hs", "Hassium", 3, 8, 0, 0, 1984, "Gesellschaft für Schwerionenforschung (GSI)"},
+                                        {109, 278, "Mt", "Meitnerium", 3, 9, 0, 0, 1982, "Gesellschaft für Schwerionenforschung (GSI)"},
+                                        {110, 281, "Ds", "Darmstadtium", 3, 10, 0, 0, 1994, "Gesellschaft für Schwerionenforschung (GSI)"},
+                                        {111, 282, "Rg", "Roentgenium", 3, 11, 0, 0, 1994, "Gesellschaft für Schwerionenforschung (GSI)"},
+                                        {112, 285, "Cn", "Copernicium", 3, 12, 0, 0, 1996, "Gesellschaft für Schwerionenforschung (GSI)"},
                                         {113, 286, "Nh", "Nihonium", 3, 13, 0, 0, 2003, "RIKEN, JINR"},
                                         {114, 289, "Fl", "Flerovium", 3, 14, 0, 0, 1998, "Joint Institute for Nuclear Research (JINR)"},
                                         {115, 288, "Mc", "Moscovium", 3, 15, 0, 0, 2003, "RIKEN, JINR"},
@@ -422,10 +422,11 @@ void writeElementToFile(string fileName, ChemistryElement updatedElement, int el
 
     if (outFile.good())
     {
-        s.seekp(elementPosition * sizeof(ChemistryElement), ios_base::beg);
-        s.write((char*)&updatedElement, sizeof(ChemistryElement));
-        s.close();
-        cout << "\n\tElement has been successfully updated";
+        outFile.seekp(elementPosition * sizeof(ChemistryElement), ios_base::beg);
+        outFile.write((char*)&updatedElement, sizeof(ChemistryElement));
+        outFile.close();
+        if (showResults)
+            cout << "\n\tElement has been successfully updated";
     }
     else
     {
@@ -849,6 +850,8 @@ void writeArrayToBinaryFile(ChemistryElement* elements, int numOfElement)
 
         }
         outFile.write((char*)elements, sizeof(ChemistryElement) * numOfElement);
+
+        outFile.close();*/
         cout << "\n\t SUCCESS: " << numOfElement << " (struct) from array have been written to the binary data file, " << fileName << ".\n";
         system("pause");
     }
@@ -1083,7 +1086,14 @@ void drawElements(int startingAtomicNum, int howManyEle, bool bySymbol)
         }
         if (bySymbol)
         {
-            cout << "[ " << periodicTable[index].symbol << "]";
+            if (strlen(periodicTable[index].symbol) == 1)
+            {
+                cout << "[  " << periodicTable[index].symbol << "]";
+            }
+            else
+            {
+                cout << "[ " << periodicTable[index].symbol << "]";
+            }
         }
         else
         {
